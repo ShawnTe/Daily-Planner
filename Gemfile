@@ -10,9 +10,18 @@ gem 'sinatra-contrib'
 gem 'activesupport', '~>4.2.0'
 gem 'activerecord', '~>4.2.0'
 
+# gem 'google-api-client', '~> 0.9', require: 'google/apis/calendar_v3'
+gem 'google_calendar'
+gem 'google-api-client', :require => 'google/api_client'
+# gem 'omniauth-google-oauth2', :git => 'https://github.com/zquestz/omniauth-google-oauth2.git'
+
+
+
 gem 'rake'
 
 gem 'shotgun'
+gem 'dotenv'
+
 
 group :test do
   gem 'shoulda-matchers'
