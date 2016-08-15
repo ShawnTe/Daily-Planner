@@ -1,4 +1,5 @@
 # Show all todos
+
 get '/todos' do
   @todos = Todo.all
   erb :'/todos/index'
@@ -11,7 +12,15 @@ end
 
 # Create new todos
 post '/todos' do
-  redirect '/todos'
+  todo = Todo.new(params[:todo])
+  todo.brainjuice_id = bj_id
+  if todo.save
+    p todo
+    redirect '/todos'
+  else
+    @errors = todo.errors.full_messages
+    erb :'/todos/new'
+  end
 end
 
 # Show specific todos
