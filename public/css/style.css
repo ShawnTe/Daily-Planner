@@ -1,0 +1,109 @@
+body {
+  font: 14px "Futura", Helvetica, Arial, sans-serif;
+}
+
+/*a {
+  color: #00B7FF;
+}*/
+
+/*.option-article {
+  column-count: 3;            // max # of columns
+  column-width: 300px;        // minimum width --- can do this? what if col 1 is empty? how will it collapse?
+}
+see learnlayout.com/flexbox.com
+
+display: flex;*/
+li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+h1 {
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 40px;
+}
+.container {
+  margin-top: 0px;
+  width: 100%;
+}
+
+.day_layout {
+  padding-left: 30px;
+  padding-top: 18px;
+  height: 600px;
+  margin: 0 auto;
+  border: 1 solid 333;
+  background-image: url(../images/planner-bg.jpg);
+  /*background-repeat: no-repeat;*/
+  max-width: 400px;
+
+  /*background-image: url(../images/image-sample.jpg);*/
+  content: "";
+
+
+  /*height: ?????;*/
+}
+
+.title {
+  position: absolute;
+  margin-top: 0;
+}
+
+.box {
+  /*height: 100px;*/
+  width: 350px;
+  /*float:left; DOESN'T WORK*/
+
+}
+
+/*#sgrip{
+    bottom: -5px;
+    left: 50%;
+}*/
+
+.text-box {
+  text-align: center;
+  font-size: 125%;
+  color: white;
+
+}
+
+.high {
+  margin: auto;
+  background-color: #c0392b;
+  height: 150px;
+}
+
+.medium {
+  background-color: #f39c12;
+  margin: auto;
+  height: 80px;
+
+}
+
+.low {
+  background-color: #1abc9c;
+  margin: auto;
+  height:80px;
+
+}
+
+.routine {
+  background-color: #8e44ad;
+  margin: auto;
+  height: 40px;
+
+}
+
+turquoise #1abc9c
+yellow-orange #f39c12
+pumpkin #d35400
+red #c0392b
+purple #8e44ad
+dark gray #2c3e50
+med gray #7f8c8d
+light gray #bdc3c7
+really light gray #ecf0f1
+
+blue #2980b9
