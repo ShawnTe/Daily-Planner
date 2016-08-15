@@ -1,0 +1,34 @@
+<% if @todos %>
+  <ul id="high">
+    <h3>High</h3>
+    <% @todos.each do |task| %>
+      <% if task.brainjuice_id == 1 %>
+      <li>
+        <%= task.time_est%> -- <%= task.brainjuice_id %> -- <%= task.name %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <ul id="meduium">
+    <h3>Medium</h3>
+    <% @todos.each do |task| %>
+      <% if task.brainjuice_id == 2 %>
+      <li>
+        <%= task.time_est%> -- <%= task.brainjuice_id %> -- <%= task.name %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <ul id="low">
+    <h3>Low</h3>
+    <% @todos.each do |task| %>
+      <% if task.brainjuice_id == 3 %>
+      <li>
+        <%= task.time_est%> -- <%= task.brainjuice_id %> -- <%= task.name %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
