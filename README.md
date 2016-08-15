@@ -6,6 +6,7 @@
 - User can drag and drop containers on day times
 - User can resize containers
 - Site is deployed on Heroku
+- WOOOTTTTT!!!
 
 ### v.next
 - User sees tasks divided into high, med low priority/brain juice
