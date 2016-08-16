@@ -75,10 +75,22 @@ var showTodoLists = function(){
       })
       .done(function(server_response) {
         var task = JSON.parse(server_response)
-        $( "ul li" ).prepend(
+
+        if (task.brainjuice_id == 1) {
+         $( "ul#high li" ).first().prepend(
           "<li><input type='checkbox' name=" + task.id +
           " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
+        } else if (task.brainjuice_id ==2) {
+            $( "ul#medium li" ).first().prepend(
+              "<li><input type='checkbox' name=" + task.id +
+              " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
+        } else {
+            $( "ul#low li" ).first().prepend(
+              "<li><input type='checkbox' name=" + task.id +
+              " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
+        }
         // if high/med/low, prepend to list
+
       })
       .fail(function(server_response) {
         alert(server_response.error)
