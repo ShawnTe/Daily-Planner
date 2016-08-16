@@ -16,6 +16,7 @@ post '/todos' do
   todo.brainjuice_id = bj_id
   if todo.save
     p todo
+    p "*" * 50
     redirect '/todos'
   else
     @errors = todo.errors.full_messages

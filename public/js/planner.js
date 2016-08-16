@@ -62,12 +62,27 @@ var showTodoLists = function(){
     })
   }
 
-  // var submitNewTodo = function() {
-  //   $("#dialog").on('submit', function(event) {
-  //     event.preventDefault();
-  //     url
-  //   })
-  // }
+  var submitNewTodo = function() {
+    $("#dialog").on('submit', function(event) {
+      event.preventDefault();
+      var url = $(this).children().attr("action");
+      var formData = $("#new-todo-form").serialize();
+      console.log(formData);
+      $.ajax({
+        url: url,
+        method: "POST",
+        data: formData
+      })
+      .done(function(server_response) {
+        console.log(server_response);
+        // if high/med/low, prepend to list
+      })
+      .fail(function(server_response) {
+        alert(server_response.error)
+      })
+      debugger
+    })
+  }
 
 // Pops up jqueryui dialog box. I don't like how it looks:
 // var showNewTodoForm = function() {
