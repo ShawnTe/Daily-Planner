@@ -5,7 +5,7 @@ $(document).ready(function(){
   showNewTodoForm();
   // var doneStructuring = false
   $("#btn-structure").on('click', function() {showTodoLists();});
-
+  submitNewTodo();
 });
 
 var draggableBoxes = function(){
@@ -19,7 +19,7 @@ var draggableBoxes = function(){
 
 var resizableBoxes = function(){
   $(".box").resizable({
-    grid: [0, 25],
+    grid: [0, 15],
     maxHeight: 400,
     maxWidth: 350,
     minHeight: 25,
@@ -54,30 +54,55 @@ var showTodoLists = function(){
     // var url = '/todos/'
   // })
 
-var showNewTodoForm = function() {
-  $("#dialog").dialog({
-      autoOpen: false,
-      minHeight: 250,
-      position: {
-                  my: "right center",
-                  at: "right center"
-               }
-    });
-  $("#button").on('click', function(){
-    event.preventDefault();
-    $("#dialog").dialog("open");
-  });
-};
+  var showNewTodoForm = function() {
+    $("#showTodoForm").on('click', function(event) {
+      event.preventDefault();
+      $("#dialog").show();
+      $("#showTodos").append($("#dialog"))
+    })
+  }
+
+  var submitNewTodo = function() {
+    $("#dialog").on('submit', function(event) {
+      event.preventDefault();
+      var url = $(this).children().attr("action");
+      var formData = $("#new-todo-form").serialize();
+      console.log(formData);
+      $.ajax({
+        url: url,
+        method: "POST",
+        data: formData
+      })
+      .done(function(server_response) {
+        console.log(server_response);
+        console.log("this was the server response")
+        // if high/med/low, prepend to list
+      })
+      .fail(function(server_response) {
+        alert(server_response.error)
+      })
+      debugger
+    })
+  }
+
+// Pops up jqueryui dialog box. I don't like how it looks:
+// var showNewTodoForm = function() {
+//   $("#dialog").dialog({
+//       autoOpen: false,
+//       minHeight: 250,
+//       position: {
+//                   my: "right center",
+//                   at: "right center"
+//                }
+//     });
+//   $("#button").on('click', function(){
+//     event.preventDefault();
+//     $("#dialog").dialog("open");
+//   });
+// };
 
 
-  //   $.ajax({
-  //     // url: url,
-  //     // type: "PUT"
 
-  //   })
-  // } else {
-
-  // }
 
 // click to clear checked items
 
