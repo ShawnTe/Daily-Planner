@@ -75,6 +75,7 @@ var showTodoLists = function(){
       })
       .done(function(server_response) {
         console.log(server_response);
+        console.log("this was the server response")
         // if high/med/low, prepend to list
       })
       .fail(function(server_response) {

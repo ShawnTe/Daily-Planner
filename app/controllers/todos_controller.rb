@@ -15,13 +15,17 @@ post '/todos' do
   todo = Todo.new(params[:todo])
   todo.brainjuice_id = bj_id
   if todo.save
-    p todo
-    p "*" * 50
-    redirect '/todos'
+    if request.xhr?
+      todo.to_json
+      p "*" * 50
+    else
+      redirect '/todos'
+    end
   else
     @errors = todo.errors.full_messages
-    erb :'/todos/new'
+    redirect '/todos'
   end
+    # erb :'/todos/new'
 end
 
 # Show specific todos
