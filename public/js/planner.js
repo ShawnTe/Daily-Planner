@@ -1,12 +1,18 @@
 $(document).ready(function(){
 
+  hideNotesSection();
   draggableBoxes();
   resizableBoxes();
   showNewTodoForm();
   // var doneStructuring = false
   $("#btn-structure").on('click', function() {showTodoLists();});
   submitNewTodo();
+  showNotes();
 });
+
+var hideNotesSection = function() {
+  $("#focus-todo").hide();
+}
 
 var draggableBoxes = function(){
   $(".box").draggable({
@@ -67,7 +73,8 @@ var showTodoLists = function(){
       event.preventDefault();
       var url = $(this).children().attr("action");
       var formData = $("#new-todo-form").serialize();
-      console.log(formData);
+        // $("#new-todo-form").reset();
+        $('#new-todo-form').find('input:text').val('');
       $.ajax({
         url: url,
         method: "POST",
@@ -75,11 +82,11 @@ var showTodoLists = function(){
       })
       .done(function(server_response) {
         var task = JSON.parse(server_response)
-
         if (task.brainjuice_id == 1) {
          $( "ul#high li" ).first().prepend(
           "<li><input type='checkbox' name=" + task.id +
           " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
+
         } else if (task.brainjuice_id ==2) {
             $( "ul#medium li" ).first().prepend(
               "<li><input type='checkbox' name=" + task.id +
@@ -89,13 +96,31 @@ var showTodoLists = function(){
               "<li><input type='checkbox' name=" + task.id +
               " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
         }
-        // if high/med/low, prepend to list
-
       })
       .fail(function(server_response) {
         alert(server_response.error)
       })
-      // debugger
+    })
+  }
+
+
+
+
+  var showNotes = function(){
+    $("#showTodos a").on('click', function(){
+      event.preventDefault();
+      var url = $(this).val("href").attr("href")
+
+      $.ajax({
+        url:  url,
+        // method: "GET"
+      })
+// debugger
+      .done(function(response) {
+        var task = JSON.parse(response)
+        $("textarea").text(task.notes)
+        $("#focus-todo label").text(task.name)
+      })
     })
   }
 

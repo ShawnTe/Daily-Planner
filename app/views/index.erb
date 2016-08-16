@@ -1,12 +1,17 @@
 
 <div class="flex-item">
-  <h1>A Visual Planner<br>
+  <div>
+    <h1>A Visual Planner<br>
       <% d = Time.now %>
       <%= d.strftime("%e %B") %>
     </h1>
-  <div id="notes">
   </div>
-</div>
+  <div id="focus-todo">
+    <label for="notes-section">Label</label>
+    <textarea id="notes" name="notes-section" rows="20" cols = "50">
+    </textarea>
+    </div>
+  </div>
 
 <div class="flex-item white" >
 <!--   <div class="container"> -->
@@ -79,7 +84,7 @@
         <% @todos.each do |task| %>
           <% if task.brainjuice_id == 1 %>
           <li><input type="checkbox" name="<%= task.id %>" class="todo-completed">
-            (<%= task.time_est%> <em>min</em>) &nbsp; <%= task.name %>
+          (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>"><%= task.name %></a>
           </li>
           <% end %>
         <% end %>

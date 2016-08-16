@@ -77,7 +77,18 @@ h1 {
   position: absolute;
   margin-top: 0px;
 }
+label {
+  display:block;
+}
 
+textarea {
+  margin-left: 8%;
+  margin-top: 35%;
+  width: 80%;
+  height: 300px;
+  font-size: 200%;
+  display: block;
+}
 .box {
   /*height: 100px;*/
   width: 350px;

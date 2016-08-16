@@ -15,8 +15,6 @@ post '/todos' do
   todo.brainjuice_id = bj_id
   if todo.save
     if request.xhr?
-      p todo
-      p "*" * 50
       todo.to_json
     else
       redirect '/todos'
@@ -25,12 +23,21 @@ post '/todos' do
     @errors = todo.errors.full_messages
     redirect '/todos'
   end
-    # erb :'/todos/new'
 end
 
 # Show specific todos
 get '/todos/:id' do
-  erb :'/todos/show'
+  p "in the show route"
+  @todo = Todo.find(params[:id])
+  if @todo
+    if request.xhr?
+      @todo.to_json
+    else
+      erb :show
+    end
+  else
+    redirect '/todos'
+  end
 end
 
 # Form to edit todo
