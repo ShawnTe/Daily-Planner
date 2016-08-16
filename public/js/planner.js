@@ -74,14 +74,16 @@ var showTodoLists = function(){
         data: formData
       })
       .done(function(server_response) {
-        console.log(server_response);
-        console.log("this was the server response")
+        var task = JSON.parse(server_response)
+        $( "ul li" ).prepend(
+          "<li><input type='checkbox' name=" + task.id +
+          " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
         // if high/med/low, prepend to list
       })
       .fail(function(server_response) {
         alert(server_response.error)
       })
-      debugger
+      // debugger
     })
   }
 

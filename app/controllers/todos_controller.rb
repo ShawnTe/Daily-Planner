@@ -1,5 +1,4 @@
 # Show all todos
-
 get '/todos' do
   @todos = Todo.all
   erb :'/index'
@@ -16,8 +15,9 @@ post '/todos' do
   todo.brainjuice_id = bj_id
   if todo.save
     if request.xhr?
-      todo.to_json
+      p todo
       p "*" * 50
+      todo.to_json
     else
       redirect '/todos'
     end
