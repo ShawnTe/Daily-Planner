@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
+  <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
@@ -12,7 +12,7 @@
   -->
   <link rel="stylesheet" href="/css/style.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/start/jquery-ui.css"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
   <script src="/js/planner.js"></script>
@@ -21,6 +21,8 @@
 
 </head>
 <body>
-  <%= yield %>
+  <div class="flex-container">
+    <%= yield %>
+  </div>
 </body>
 </html>

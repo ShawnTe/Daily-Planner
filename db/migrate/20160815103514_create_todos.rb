@@ -4,7 +4,7 @@ class CreateTodos < ActiveRecord::Migration
       t.string :name
       t.string :notes
       t.integer :time_est
-      t.boolean :completed
+      t.boolean :completed, default: false
       t.integer :user_id
       t.integer :brainjuice_id
 
