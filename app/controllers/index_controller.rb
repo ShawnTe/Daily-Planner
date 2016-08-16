@@ -1,11 +1,8 @@
 get '/' do
   # calendars
-  erb :index
+  redirect '/todos'
 end
 
-get '/grid' do
-  erb :grid
-end
 
 
 # def redirect
@@ -52,7 +49,7 @@ end
 
 # # Create an instance of the calendar.
 
-# cal = Google::Calendar.new(:client_id     => '739264926242-diu9kf45da7oer2mbef1g1q0iipu4k7u.apps.googleusercontent.com', 
+# cal = Google::Calendar.new(:client_id     => '739264926242-diu9kf45da7oer2mbef1g1q0iipu4k7u.apps.googleusercontent.com',
 #                            :client_secret => 'GOmOJC6CgFIoIMxw14o1nB5ly',
 #                            :calendar      => 'qlgg01d50c4ie5n5iufk642ap4@group.calendar.google.com',
 #                            :redirect_url  => "http://localhost:9393/oauth2callback", # this is what Google uses for 'applications'

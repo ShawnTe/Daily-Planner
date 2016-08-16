@@ -2,7 +2,7 @@
 
 get '/todos' do
   @todos = Todo.all
-  erb :'/todos/index'
+  erb :'/index'
 end
 
 # Form to create new todo

@@ -9,7 +9,7 @@ Brainjuice.delete_all
 end
 
 times = [5, 15, 30, 60]
-40.times do
+20.times do
   Todo.create(name: Faker::Hipster.sentence(word_count = 4), time_est: times.sample, completed: false, user_id: 1+ rand(2), brainjuice_id: 1 + rand(3))
 end
 

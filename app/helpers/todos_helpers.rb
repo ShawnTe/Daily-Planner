@@ -1,5 +1,4 @@
 
-
   def bj_id
     bj_required = params[:todo]["brainjuice_id"]
     case bj_required
