@@ -8,6 +8,7 @@ $(document).ready(function(){
   $("#btn-structure").on('click', function() {showTodoLists();});
   submitNewTodo();
   showNotes();
+  editNotes();
 });
 
 var hideNotesSection = function() {
@@ -85,16 +86,16 @@ var showTodoLists = function(){
         if (task.brainjuice_id == 1) {
          $( "ul#high li" ).first().prepend(
           "<li><input type='checkbox' name=" + task.id +
-          " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
+          " class='todo-completed'>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
 
         } else if (task.brainjuice_id ==2) {
             $( "ul#medium li" ).first().prepend(
-              "<li><input type='checkbox' name=" + task.id +
-              " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
+             "<li><input type='checkbox' name=" + task.id +
+          " class='todo-completed'>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
         } else {
             $( "ul#low li" ).first().prepend(
               "<li><input type='checkbox' name=" + task.id +
-              " class='todo-completed'>(" + task.time_est + ") <em>min</em>  " + task.name + "</li>" );
+          " class='todo-completed'>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
         }
       })
       .fail(function(server_response) {
@@ -103,25 +104,52 @@ var showTodoLists = function(){
     })
   }
 
-
-
-
   var showNotes = function(){
     $("#showTodos a").on('click', function(){
       event.preventDefault();
-      var url = $(this).val("href").attr("href")
 
+
+      // $("#focus-todo").show();
+      var url = $(this).val("href").attr("href")
       $.ajax({
         url:  url,
-        // method: "GET"
       })
-// debugger
       .done(function(response) {
-        var task = JSON.parse(response)
-        $("textarea").text(task.notes)
-        $("#focus-todo label").text(task.name)
+        var edit_form = JSON.parse(response)
+        // console.log(task);
+        $("#edit-form").append(edit_form)
       })
     })
+  }
+        // var task = JSON.parse(response)
+        // $("textarea").text(task.notes)
+        // $("#focus-todo label").text(task.name)
+          // action="/todos/<%= @note.id %>"
+        // $("form#edit").attr("action", "/todos/" + task.id)
+
+  var editNotes = function() {
+    $("#edit").on('submit', function(event) {
+      event.preventDefault();
+
+        alert("I'm in route route");
+
+        var url = $(this).attr("href");
+        var formData = $(this).serialize();
+
+        console.log(this);
+        console.log(url);
+        console.log(formData);
+
+        $.ajax({
+          url: url,
+          data: formData,
+          method: "PUT"
+        })
+        .done(function(res) {
+          console.log(res);
+        })
+
+      })
   }
 
 // Pops up jqueryui dialog box. I don't like how it looks:

@@ -30,6 +30,7 @@ see learnlayout.com/flexbox.com
   padding-top: 30px;
   background-color: #ecf0f1;
 
+
 }
 
 .white {
@@ -77,8 +78,9 @@ h1 {
   position: absolute;
   margin-top: 0px;
 }
-label {
-  display:block;
+#testing {
+/*  display:block;*/
+  height: 30px;
 }
 
 textarea {
@@ -87,7 +89,7 @@ textarea {
   width: 80%;
   height: 300px;
   font-size: 200%;
-  display: block;
+  /*display: block;*/
 }
 .box {
   /*height: 100px;*/

@@ -1,0 +1,9 @@
+  <form method="post" id="edit" action="/todos/<%= @todo.id %>">
+    <input type="hidden" name="_method" value="put">
+    <label for="notes"><%= @todo.name %></label>
+    <textarea id="notes" name="notes" rows="20" cols = "50"><%= @todo.notes %></textarea><br>
+    <input type="checkbox" name="completed">Mark this complete<br>
+    <input type="submit" value="Save changes to note">
+  </form>
+
+

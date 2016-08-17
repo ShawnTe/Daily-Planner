@@ -25,6 +25,8 @@ post '/todos' do
   end
 end
 
+
+
 # Show specific todos
 get '/todos/:id' do
   p "in the show route"
@@ -42,13 +44,28 @@ end
 
 # Form to edit todo
 get '/todos/:id/edit' do
-  erb :'/todos/edit'
+  p params["id"]
+  p "*" * 30
+  @todo = Todo.find(params["id"])
+  if request.xhr?
+    response = erb :'/todos/_edit', layout: false, locals: {task: @todo}
+    p response
+    response.to_json
+  else
+    erb :'/todos/edit'
+  end
 end
 
 # Update a todo
 put '/todos/:id' do
-  redirect '/todos'
+  # p params
+  todo = Todo.find(params[:id])
+  new_note = params["notes-section"]
+  todo.update(notes: new_note)
+  redirect "/todos"
 end
+
+
 
 # Delete todos
 delete '/todos/:id' do
