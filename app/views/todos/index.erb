@@ -1,0 +1,37 @@
+<% if @todos %>
+  <ul id="high">
+    <h3>High</h3>
+    <a href="/todos/new">Create new high brainjuice todo</a>
+    <% @todos.each do |task| %>
+      <% if task.brainjuice_id == 1 %>
+      <li><input type="checkbox" name="<%= task.id %>" class="todo-completed">
+        (<%= task.time_est%> <em>min</em>) &nbsp; <%= task.name %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <ul id="meduium">
+    <h3>Medium</h3>
+    <a href="/todos/new">Create new medium brainjuice todo</a>
+    <% @todos.each do |task| %>
+      <% if task.brainjuice_id == 2 %>
+      <li><input type="checkbox" name="todo-completed">
+        (<%= task.time_est%> <em>min</em>) &nbsp; <%= task.name %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <ul id="low">
+    <h3>Low</h3>
+    <a href="/todos/new">Create new low brainjuice todo</a>
+    <% @todos.each do |task| %>
+      <% if task.brainjuice_id == 3 %>
+      <li><input type="checkbox" name="todo-completed">
+        (<%= task.time_est%> <em>min</em>) &nbsp; <%= task.name %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
