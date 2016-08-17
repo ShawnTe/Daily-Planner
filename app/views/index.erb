@@ -1,12 +1,16 @@
 
 <div class="flex-item">
-  <h1>A Visual Planner<br>
+  <div>
+    <h1>A Visual Planner<br>
       <% d = Time.now %>
       <%= d.strftime("%e %B") %>
     </h1>
-  <div id="notes">
   </div>
-</div>
+
+  <div id="edit-form">
+
+  </div>
+  </div>
 
 <div class="flex-item white" >
 <!--   <div class="container"> -->
@@ -54,7 +58,7 @@
 <a class="btn" id="showTodoForm" href="/todos/new">Create new todo</a>
     <div id="dialog">
         <form action="/todos" method="post" id="new-todo-form">
-          <input type="text" placeholder="Whatcha need to do?" name="todo[name]">
+          <input type="text" placeholder="Whatcha need to do?" name="todo[name]" autofocus>
           <select name="todo[time_est]" id="time-est">
             <option>5 min</option>
             <option>15 min</option>
@@ -78,8 +82,8 @@
         <h3>High</h3>
         <% @todos.each do |task| %>
           <% if task.brainjuice_id == 1 %>
-          <li><input type="checkbox" name="<%= task.id %>" class="todo-completed">
-            (<%= task.time_est%> <em>min</em>) &nbsp; <%= task.name %>
+          <li>
+          (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"><%= task.name %></a>
           </li>
           <% end %>
         <% end %>
@@ -89,8 +93,8 @@
         <h3>Medium</h3>
         <% @todos.each do |task| %>
           <% if task.brainjuice_id == 2 %>
-          <li><input type="checkbox" name="todo-completed">
-            (<%= task.time_est%> <em>min</em>) &nbsp; <%= task.name %>
+          <li>
+            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"><%= task.name %></a>
           </li>
           <% end %>
         <% end %>
@@ -100,8 +104,8 @@
         <h3>Low</h3>
         <% @todos.each do |task| %>
           <% if task.brainjuice_id == 3 %>
-          <li><input type="checkbox" name="todo-completed">
-              (<%= task.time_est%> <em>min</em>) &nbsp; <%= task.name %>
+          <li>
+              (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"><%= task.name %></a>
           </li>
           <% end %>
         <% end %>

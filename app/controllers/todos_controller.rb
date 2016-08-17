@@ -1,5 +1,4 @@
 # Show all todos
-
 get '/todos' do
   @todos = Todo.all
   erb :'/index'
@@ -17,7 +16,6 @@ post '/todos' do
   if todo.save
     if request.xhr?
       todo.to_json
-      p "*" * 50
     else
       redirect '/todos'
     end
@@ -25,23 +23,55 @@ post '/todos' do
     @errors = todo.errors.full_messages
     redirect '/todos'
   end
-    # erb :'/todos/new'
 end
+
+
 
 # Show specific todos
 get '/todos/:id' do
-  erb :'/todos/show'
+  p "in the show route"
+  @todo = Todo.find(params[:id])
+  if @todo
+    if request.xhr?
+      @todo.to_json
+    else
+      erb :show
+    end
+  else
+    redirect '/todos'
+  end
 end
 
 # Form to edit todo
 get '/todos/:id/edit' do
-  erb :'/todos/edit'
+  # p params["id"]
+  @todo = Todo.find(params["id"])
+  if request.xhr?
+    response = erb :'/todos/_edit', layout: false, locals: {task: @todo}
+    p response
+    response.to_json
+  else
+    erb :'/todos/edit'
+  end
 end
 
 # Update a todo
 put '/todos/:id' do
-  redirect '/todos'
+  todo = Todo.find(params[:id])
+  new_note = params["notes"]
+  if params["completed"]
+    todo.update(completed: true)
+  end
+  todo.update(notes: new_note)
+
+  if request.xhr?
+    todo.to_json
+  else
+    redirect "/todos"
+  end
 end
+
+
 
 # Delete todos
 delete '/todos/:id' do
