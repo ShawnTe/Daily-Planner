@@ -85,17 +85,14 @@ var showTodoLists = function(){
         var task = JSON.parse(server_response)
         if (task.brainjuice_id == 1) {
          $( "ul#high li" ).first().prepend(
-          "<li><input type='checkbox' name=" + task.id +
-          " class='todo-completed'>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
+          "<li>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
 
         } else if (task.brainjuice_id ==2) {
             $( "ul#medium li" ).first().prepend(
-             "<li><input type='checkbox' name=" + task.id +
-          " class='todo-completed'>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
+             "<li>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
         } else {
             $( "ul#low li" ).first().prepend(
-              "<li><input type='checkbox' name=" + task.id +
-          " class='todo-completed'>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
+              "<li>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
         }
       })
       .fail(function(server_response) {
@@ -128,15 +125,12 @@ var showTodoLists = function(){
         // $("form#edit").attr("action", "/todos/" + task.id)
 
   var editNotes = function() {
-    $("#edit").on('submit', function(event) {
+    $("#edit-form").on('submit', function(event) {
       event.preventDefault();
+        var url = $(edit).attr("action");
+        var formData = $(edit).serialize();
 
-        alert("I'm in route route");
-
-        var url = $(this).attr("href");
-        var formData = $(this).serialize();
-
-        console.log(this);
+        console.log(edit);
         console.log(url);
         console.log(formData);
 
@@ -147,8 +141,12 @@ var showTodoLists = function(){
         })
         .done(function(res) {
           console.log(res);
-        })
+          $("#edit-form").hide();
 
+        })
+        .fail(function(res) {
+          console.log(errThrown)
+        })
       })
   }
 

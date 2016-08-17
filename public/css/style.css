@@ -78,14 +78,10 @@ h1 {
   position: absolute;
   margin-top: 0px;
 }
-#testing {
-/*  display:block;*/
-  height: 30px;
-}
 
 textarea {
   margin-left: 8%;
-  margin-top: 35%;
+  margin-top: 30%;
   width: 80%;
   height: 300px;
   font-size: 200%;

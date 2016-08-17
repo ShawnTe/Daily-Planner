@@ -44,8 +44,7 @@ end
 
 # Form to edit todo
 get '/todos/:id/edit' do
-  p params["id"]
-  p "*" * 30
+  # p params["id"]
   @todo = Todo.find(params["id"])
   if request.xhr?
     response = erb :'/todos/_edit', layout: false, locals: {task: @todo}
@@ -58,11 +57,18 @@ end
 
 # Update a todo
 put '/todos/:id' do
-  # p params
   todo = Todo.find(params[:id])
-  new_note = params["notes-section"]
+  new_note = params["notes"]
+  if params["completed"]
+    todo.update(completed: true)
+  end
   todo.update(notes: new_note)
-  redirect "/todos"
+
+  if request.xhr?
+    todo.to_json
+  else
+    redirect "/todos"
+  end
 end
 
 
