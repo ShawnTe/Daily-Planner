@@ -44,11 +44,9 @@ end
 
 # Form to edit todo
 get '/todos/:id/edit' do
-  # p params["id"]
   @todo = Todo.find(params["id"])
   if request.xhr?
     response = erb :'/todos/_edit', layout: false, locals: {task: @todo}
-    p response
     response.to_json
   else
     erb :'/todos/edit'
