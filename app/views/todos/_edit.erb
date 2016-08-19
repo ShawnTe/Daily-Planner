@@ -1,8 +1,13 @@
   <form method="post" id="edit" action="/todos/<%= @todo.id %>">
     <input type="hidden" name="_method" value="put">
-    <label for="notes"><%= @todo.name %></label>
+    <label>Title: </label>
+      <input type="text" name="name" value="<%= @todo.name %>">
     <textarea id="notes" name="notes" rows="20" cols = "50"><%= @todo.notes %></textarea><br>
-    <input type="checkbox" name="completed">Mark this complete<br>
+    <label>Brainjuice required: </label>
+      <input type="text" name="brainjuice_id" value="<%= @bj_name %>">
+     <label>Time est:</label>
+      <input type="number" name="time_est" value="<%= @todo.time_est %>">
+      <input type="checkbox" name="completed">Mark this complete<br>
     <input type="submit" value="Save changes to note">
   </form>
 

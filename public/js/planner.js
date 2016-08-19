@@ -100,7 +100,8 @@ var showTodoLists = function(){
       })
       .done(function(server_response) {
         var edit_form = JSON.parse(server_response)
-        $("#edit-form").append(edit_form)
+        $("#edit-form").empty().append(edit_form)
+        $("#edit-form").show();
       })
       .fail(function(server_response) {
         alert(server_response.error)
