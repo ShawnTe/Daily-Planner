@@ -6,7 +6,9 @@
       <%= d.strftime("%e %B") %>
     </h1>
   </div>
-
+  <div id="first-step">
+    <h3> Step #1<br>Arrange the boxes to plan out your day.</h3>
+  </div>
   <div id="edit-form">
   </div>
 </div>
@@ -39,7 +41,8 @@
       </p>
     </div>
   </div>
-  <input id="btn-structure" type="button" value="Done with structuring day">
+  <input type="button" id="btn-structure" value="Done structuring day">
+
 </div>
 
 <div class="flex-item" id="right-side">
@@ -53,13 +56,16 @@
           <option>30 min</option>
           <option>60 min</option>
         </select>
-        <select name="todo[brainjuice_id]" id="bj-new-todo">
+        <select name="brainjuice_id" id="bj-new-todo">
           <option>Medium</option>
           <option>High</option>
           <option>Low</option>
         </select>
-        <input type="submit">
+        <input type="submit" id="new-todo-btn">
       </form>
+      <input type="button" id="todo-done-btn" class="hide" value="Done entering Todos">
+      <h3 id="msg-next-step">Click on one of the Brain Juice boxes to see all tasks for that level.</h3>
+
     </div>
   <div id="showTodos">
     <% if @todos %>

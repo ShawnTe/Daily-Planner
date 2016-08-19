@@ -1,14 +1,17 @@
 $(document).ready(function(){
 
+  $("#msg-next-step").hide();
   hideNotesSection();
   draggableBoxes();
   resizableBoxes();
+  doneStructuringDay();
   showNewTodoForm();
-  $("#btn-structure").on('click', function() {showTodoLists();});
   submitNewTodo();
+  doneEnteringTodos();
   showNotes();
   editNotes();
 });
+
 
 var hideNotesSection = function() {
   $("#focus-todo").hide();
@@ -19,7 +22,7 @@ var draggableBoxes = function(){
     axis: "y",
     containment: "parent",
     grid: [0, 15],
-    opacity: 0.5
+    opacity: 0.5,
   });
 };
 
@@ -31,6 +34,15 @@ var resizableBoxes = function(){
     minHeight: 25,
     minWidth: 350,
   });
+
+}
+
+var doneStructuringDay = function(){
+  $("#btn-structure").on('click', function() {
+    showTodoLists();
+    $(this).hide();
+    $("#first-step").hide();
+  });
 }
 
 var showTodoLists = function(){
@@ -38,120 +50,103 @@ var showTodoLists = function(){
       $("#medium").hide();
       $("#low").hide();
       $("#high").toggle();
+     $("#msg-next-step").hide();
+
     });
 
     $(".medium").on('click', function(){
       $("#high").hide();
       $("#low").hide();
       $("#medium").toggle();
+     $("#msg-next-step").hide();
+
     })
 
     $(".low").on('click', function(){
-    $("#low").toggle();
-    $("#high").hide();
-    $("#medium").hide();
+      $("#low").toggle();
+      $("#high").hide();
+      $("#medium").hide();
+      $("#msg-next-step").hide();
     })
  }
 
-  var showNewTodoForm = function() {
-    $("#showTodoForm").on('click', function(event) {
-      event.preventDefault();
-      $("#dialog").show();
-      $("#showTodos").append($("#dialog"))
+var showNewTodoForm = function() {
+  $("#showTodoForm").on('click', function(event) {
+    event.preventDefault();
+    $("#dialog").show();
+    $("#showTodos").append($("#dialog"))
+    $(this).hide();
+  })
+}
+
+var submitNewTodo = function() {
+  $("#dialog").on('submit', function(event) {
+    event.preventDefault();
+    var url = $(this).children().attr("action");
+    var formData = $("#new-todo-form").serialize();
+    $('#new-todo-form').find('input:text').val('');
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: formData
     })
-  }
-
-  var submitNewTodo = function() {
-    $("#dialog").on('submit', function(event) {
-      event.preventDefault();
-      var url = $(this).children().attr("action");
-      var formData = $("#new-todo-form").serialize();
-      $('#new-todo-form').find('input:text').val('');
-      $.ajax({
-        url: url,
-        method: "POST",
-        data: formData
-      })
-      .done(function(server_response) {
-        var task = JSON.parse(server_response)
-        if (task.brainjuice_id == 1) {
-         $( "ul#high li" ).first().prepend(
-          "<li>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
-        } else if (task.brainjuice_id ==2) {
-            $( "ul#medium li" ).first().prepend(
-             "<li>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
-        } else {
-            $( "ul#low li" ).first().prepend(
-              "<li>(" + task.time_est + " <em>min</em>) <a href='/todos/<%=" + task.id + "%>''> &nbsp;" + task.name + "</a></li>" );
-        }
-      })
-      .fail(function(server_response) {
-        alert(server_response.error)
-      })
+    .done(function(server_response) {
+      $("#todo-done-btn").show();
+      var task = JSON.parse(server_response)
+      if (task.brainjuice_id == 1) {
+       $( "ul#high li" ).first().prepend(
+        "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
+      } else if (task.brainjuice_id ==2) {
+        $( "ul#medium li" ).first().prepend(
+         "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
+      } else {
+        $( "ul#low li" ).first().prepend(
+          "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
+      }
     })
-  }
-
-  var showNotes = function(){
-    $("#showTodos a").on('click', function(){
-      event.preventDefault();
-      var url = $(this).val("href").attr("href")
-      $.ajax({
-        url:  url,
-      })
-      .done(function(server_response) {
-        var edit_form = JSON.parse(server_response)
-        $("#edit-form").empty().append(edit_form)
-        $("#edit-form").show();
-      })
-      .fail(function(server_response) {
-        alert(server_response.error)
-      })
+  .fail(function(server_response) {
+      alert(server_response.error)
     })
-  }
+  })
+}
 
-  // var editNotes = function() {
-  //   $("#edit-form").on('submit', function(event) {
-  //     event.preventDefault();
-  //     var url = $("#edit-form form").attr("action");
-  //     var todo_id = $("#edit-form form").attr("id")
-  //     var formData = $("#edit-form form").serialize();
-  //     $.ajax({
-  //       url: url,
-  //       data: formData,
-  //       method: "PUT"
-  //     })
-  //     .done(function(server_response) {
-  //       $("#edit-form").hide();
+var doneEnteringTodos = function() {
+  $("#todo-done-btn").on('click', function() {
+    $(this).hide();
+    $("#new-todo-form").hide();
+    $("#msg-next-step").show();
+  })
+}
 
-  //       revised_todo = JSON.parse(server_response)
-  //       console.log(revised_todo.completed)
-  //       console.log(revised_todo.id)
+var showNotes = function(){
+  $("#showTodos").on('click', 'a', function(){
+    event.preventDefault();
+    var url = $(this).val("href").attr("href")
+    $.ajax({
+      url:  url,
+    })
+    .done(function(server_response) {
+      var edit_form = JSON.parse(server_response)
+      $("#edit-form").empty().append(edit_form)
+      $("#edit-form").show();
+    })
+    .fail(function(server_response) {
+      alert(server_response.error)
+    })
+  })
+}
 
-  //       if (revised_todo.completed == true) {
-  //         $("#showTodos")
-  //       }
+var editNotes = function() {
+  $("#edit-form").on('submit', function(event) {
+    var todo_id = $("#edit-form form").attr("id")
 
-  //     })
-  //     .fail(function(server_response) {
-  //       console.log(errThrown)
-  //     })
-  //   })
-  // }
-
-  var editNotes = function() {
-    $("#edit-form").on('submit', function(event) {
-      var todo_id = $("#edit-form form").attr("id")
-
-      event.preventDefault();
-      var url = $("#edit-form form").attr("action");
-      var todo_id = $("#edit-form form").attr("id")
-      var formData = $("#edit-form form").serialize();
-
+    event.preventDefault();
+    var url = $("#edit-form form").attr("action");
+    var todo_id = $("#edit-form form").attr("id")
+    var formData = $("#edit-form form").serialize();
   var whatFunctionIsThis = function() {
     console.log("What to do here?")
   }
-
-
       $.ajax({
         url: url,
         data: formData,
@@ -170,6 +165,7 @@ var showTodoLists = function(){
       })
     })
   }
+
 
 
 
