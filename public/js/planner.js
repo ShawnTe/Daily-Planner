@@ -1,14 +1,17 @@
 $(document).ready(function(){
 
+  $("#msg-next-step").hide();
   hideNotesSection();
   draggableBoxes();
   resizableBoxes();
-  showNewTodoForm();
   doneStructuringDay();
+  showNewTodoForm();
   submitNewTodo();
+  doneEnteringTodos();
   showNotes();
   editNotes();
 });
+
 
 var hideNotesSection = function() {
   $("#focus-todo").hide();
@@ -31,6 +34,15 @@ var resizableBoxes = function(){
     minHeight: 25,
     minWidth: 350,
   });
+
+}
+
+var doneStructuringDay = function(){
+  $("#btn-structure").on('click', function() {
+    showTodoLists();
+    $(this).hide();
+    $("#first-step").hide();
+  });
 }
 
 var showTodoLists = function(){
@@ -38,18 +50,23 @@ var showTodoLists = function(){
       $("#medium").hide();
       $("#low").hide();
       $("#high").toggle();
+     $("#msg-next-step").hide();
+
     });
 
     $(".medium").on('click', function(){
       $("#high").hide();
       $("#low").hide();
       $("#medium").toggle();
+     $("#msg-next-step").hide();
+
     })
 
     $(".low").on('click', function(){
-    $("#low").toggle();
-    $("#high").hide();
-    $("#medium").hide();
+      $("#low").toggle();
+      $("#high").hide();
+      $("#medium").hide();
+      $("#msg-next-step").hide();
     })
  }
 
@@ -58,14 +75,8 @@ var showNewTodoForm = function() {
     event.preventDefault();
     $("#dialog").show();
     $("#showTodos").append($("#dialog"))
-  })
-}
-
-var doneStructuringDay = function(){
-  $("#btn-structure").on('click', function() {
-    showTodoLists();
     $(this).hide();
-  });
+  })
 }
 
 var submitNewTodo = function() {
@@ -80,6 +91,7 @@ var submitNewTodo = function() {
       data: formData
     })
     .done(function(server_response) {
+      $("#todo-done-btn").show();
       var task = JSON.parse(server_response)
       if (task.brainjuice_id == 1) {
        $( "ul#high li" ).first().prepend(
@@ -95,6 +107,14 @@ var submitNewTodo = function() {
   .fail(function(server_response) {
       alert(server_response.error)
     })
+  })
+}
+
+var doneEnteringTodos = function() {
+  $("#todo-done-btn").on('click', function() {
+    $(this).hide();
+    $("#new-todo-form").hide();
+    $("#msg-next-step").show();
   })
 }
 
