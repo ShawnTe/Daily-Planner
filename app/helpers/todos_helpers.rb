@@ -1,7 +1,6 @@
 
-  def bj_id
-    # params[:todo]["brainjuice_id"] ||
-    bj_required = params[:brainjuice_id]
+  def bj_id(bj_word)
+    bj_required = (bj_word)
     case bj_required
     when "High"
       bj_id = 1

@@ -11,10 +11,12 @@ end
 
 # Create new todos
 post '/todos' do
+  p params
   todo = Todo.new(params[:todo])
-  todo.brainjuice_id = bj_id
+  todo.brainjuice_id = bj_id(params[:brainjuice_id])
   if todo.save
     if request.xhr?
+      p "in the new todo save and xhr"
       todo.to_json
     else
       redirect '/todos'
@@ -60,7 +62,7 @@ put '/todos/:id' do
   todo.name = params[:name]
   todo.notes = params[:notes]
   todo.time_est = params[:time_est]
-  todo.brainjuice_id = bj_id
+  todo.brainjuice_id = bj_id(params[:brainjuice_id])
   if params[:completed]
     todo.update(completed: true)
   end

@@ -1,0 +1,8 @@
+<% @todos.where(completed:false).each do |task| %>
+  <% if task.brainjuice_id == 2 %>
+  <li>
+    (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"
+    id="<%= task.id %>"> <%= task.name %></a>
+  </li>
+  <% end %>
+<% end %>
