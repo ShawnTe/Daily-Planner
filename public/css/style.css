@@ -24,15 +24,16 @@ see learnlayout.com/flexbox.com
 
 .flex-item {
   width: 32%;
-  height: 800px;
+  height: 700px;
   margin: 20px auto;
   border-radius: 10px;
   padding-top: 30px;
   background-color: #ecf0f1;
-
-
 }
 
+input {
+  margin: 10px;
+}
 .white {
   background-color: white;
 }
