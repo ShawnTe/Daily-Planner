@@ -109,24 +109,86 @@ var showTodoLists = function(){
     })
   }
 
+  // var editNotes = function() {
+  //   $("#edit-form").on('submit', function(event) {
+  //     event.preventDefault();
+  //     var url = $("#edit-form form").attr("action");
+  //     var todo_id = $("#edit-form form").attr("id")
+  //     var formData = $("#edit-form form").serialize();
+  //     $.ajax({
+  //       url: url,
+  //       data: formData,
+  //       method: "PUT"
+  //     })
+  //     .done(function(server_response) {
+  //       $("#edit-form").hide();
+
+  //       revised_todo = JSON.parse(server_response)
+  //       console.log(revised_todo.completed)
+  //       console.log(revised_todo.id)
+
+  //       if (revised_todo.completed == true) {
+  //         $("#showTodos")
+  //       }
+
+  //     })
+  //     .fail(function(server_response) {
+  //       console.log(errThrown)
+  //     })
+  //   })
+  // }
+
   var editNotes = function() {
     $("#edit-form").on('submit', function(event) {
+      var todo_id = $("#edit-form form").attr("id")
+
       event.preventDefault();
-      var url = $(edit).attr("action");
-      var formData = $(edit).serialize();
+      var url = $("#edit-form form").attr("action");
+      var todo_id = $("#edit-form form").attr("id")
+      var formData = $("#edit-form form").serialize();
+
+  var whatFunctionIsThis = function() {
+    console.log("What to do here?")
+  }
+
+
       $.ajax({
         url: url,
         data: formData,
         method: "PUT"
       })
-      .done(function(res) {
+      .done(function(a, b, c) {
+        whatFunctionIsThis(a, b, c, todo_id)
         $("#edit-form").hide();
+        revised_todo = JSON.parse(a)
+        if (revised_todo.completed == true) {
+          $("[id = " + todo_id + " ]").parent().hide()
+        }
       })
-      .fail(function(res) {
+      .fail(function(server_response) {
         console.log(errThrown)
       })
     })
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Pops up jqueryui dialog box. I don't like how it looks:
 // var showNewTodoForm = function() {
