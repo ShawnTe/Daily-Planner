@@ -29,7 +29,6 @@ end
 
 # Show specific todos
 get '/todos/:id' do
-  p "in the show route"
   @todo = Todo.find(params[:id])
   if @todo
     if request.xhr?
@@ -44,11 +43,10 @@ end
 
 # Form to edit todo
 get '/todos/:id/edit' do
-  # p params["id"]
   @todo = Todo.find(params["id"])
+  @bj_name = bj_name
   if request.xhr?
-    response = erb :'/todos/_edit', layout: false, locals: {task: @todo}
-    p response
+    response = erb :'/todos/_edit', layout: false, locals: {task: @todo, brainjuice_name: @bj_name}
     response.to_json
   else
     erb :'/todos/edit'
@@ -58,16 +56,22 @@ end
 # Update a todo
 put '/todos/:id' do
   todo = Todo.find(params[:id])
-  new_note = params["notes"]
-  if params["completed"]
+
+  todo.name = params[:name]
+  todo.notes = params[:notes]
+  todo.time_est = params[:time_est]
+  todo.brainjuice_id = bj_id
+  if params[:completed]
     todo.update(completed: true)
   end
-  todo.update(notes: new_note)
 
-  if request.xhr?
-    todo.to_json
+  if todo.save
+    if request.xhr?
+      todo.to_json
+    else
+      redirect "/todos"
+    end
   else
-    redirect "/todos"
   end
 end
 

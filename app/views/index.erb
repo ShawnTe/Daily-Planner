@@ -8,93 +8,77 @@
   </div>
 
   <div id="edit-form">
-
   </div>
-  </div>
+</div>
 
 <div class="flex-item white" >
-<!--   <div class="container"> -->
-    <div class="day_layout">
-      <div class="box routine">
-        <p class="text-box">
-          Morning Routine
-        </p>
-
-      </div>
-      <div class="box high">
-        <p class="text-box">
-          High Brain Juice
-        </p>
-
-      </div>
-      <div class="box routine">
-        <p class="text-box">
-          Lunch
-        </p>
-
-      </div>
-      <div class="box medium">
-        <p class="text-box">
-          Medium Brain Juice
-        </p>
-
-      </div>
-      <div class="box low">
-        <p class="text-box">
-         Low Brain Juice
-        </p>
-
-      </div>
-    <!-- close day layout   -->
+  <div class="day_layout">
+    <div class="box routine">
+      <p class="text-box">
+        Morning Routine
+      </p>
     </div>
-<input id="btn-structure" type="button" value="Done with structuring day">
-
-  <!-- close container -->
-<!--   </div> -->
-<!-- close flex-item -->
+    <div class="box high">
+      <p class="text-box">
+        High Brain Juice
+      </p>
+    </div>
+    <div class="box routine">
+      <p class="text-box">
+        Lunch
+      </p>
+    </div>
+    <div class="box medium">
+      <p class="text-box">
+        Medium Brain Juice
+      </p>
+    </div>
+    <div class="box low">
+      <p class="text-box">
+       Low Brain Juice
+      </p>
+    </div>
+  </div>
+  <input id="btn-structure" type="button" value="Done with structuring day">
 </div>
 
 <div class="flex-item" id="right-side">
-<a class="btn" id="showTodoForm" href="/todos/new">Create new todo</a>
+  <a class="btn" id="showTodoForm" href="/todos/new">Create new todo</a>
     <div id="dialog">
-        <form action="/todos" method="post" id="new-todo-form">
-          <input type="text" placeholder="Whatcha need to do?" name="todo[name]" autofocus>
-          <select name="todo[time_est]" id="time-est">
-            <option>5 min</option>
-            <option>15 min</option>
-            <option>30 min</option>
-            <option>60 min</option>
-          </select>
-          <select name="todo[brainjuice_id]" id="bj-new-todo">
-            <option>Medium</option>
-            <option>High</option>
-            <option>Low</option>
-          </select>
-          <input type="submit">
-        </form>
-      </div>
-
-  <!-- <a href="/todos/new" id="create-new-todo">Create new todo</a> -->
-
+      <form action="/todos" method="post" id="new-todo-form">
+        <input type="text" placeholder="Whatcha need to do?" name="todo[name]" autofocus>
+        <select name="todo[time_est]" id="time-est">
+          <option>5 min</option>
+          <option>15 min</option>
+          <option>30 min</option>
+          <option>60 min</option>
+        </select>
+        <select name="todo[brainjuice_id]" id="bj-new-todo">
+          <option>Medium</option>
+          <option>High</option>
+          <option>Low</option>
+        </select>
+        <input type="submit">
+      </form>
+    </div>
   <div id="showTodos">
     <% if @todos %>
       <ul id="high">
         <h3>High</h3>
-        <% @todos.each do |task| %>
+        <% @todos.where(completed:false).each do |task| %>
           <% if task.brainjuice_id == 1 %>
           <li>
-          (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"><%= task.name %></a>
+            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
           </li>
           <% end %>
         <% end %>
       </ul>
-
       <ul id="medium">
         <h3>Medium</h3>
-        <% @todos.each do |task| %>
+        <% @todos.where(completed:false).each do |task| %>
           <% if task.brainjuice_id == 2 %>
           <li>
-            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"><%= task.name %></a>
+            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
           </li>
           <% end %>
         <% end %>
@@ -102,10 +86,10 @@
 
       <ul id="low">
         <h3>Low</h3>
-        <% @todos.each do |task| %>
+        <% @todos.where(completed:false).each do |task| %>
           <% if task.brainjuice_id == 3 %>
           <li>
-              (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"><%= task.name %></a>
+            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
           </li>
           <% end %>
         <% end %>
