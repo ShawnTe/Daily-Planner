@@ -190,6 +190,7 @@ var showTodoLists = function(){
 
 
 
+
 // Pops up jqueryui dialog box. I don't like how it looks:
 // var showNewTodoForm = function() {
 //   $("#dialog").dialog({
