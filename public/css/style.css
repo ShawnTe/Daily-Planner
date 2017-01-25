@@ -41,7 +41,7 @@ see learnlayout.com/flexbox.com
   background-color: #ecf0f1;
   margin-left: 20px;
 }
-.first-step-flex {
+.first-step-flex, .second-step-flex {
   margin-left: 20px;
   color: #2980b9;
 }
@@ -80,12 +80,18 @@ see learnlayout.com/flexbox.com
 
 
 input {
-  margin: 10px;
+  /*margin: 10px;*/
+  width: 95%;
+  height: 50px;
 }
 .white {
   background-color: white;
 }
-
+.full-length {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
 li.nav {
   display: inline-block;
   margin-right: 15px;
@@ -152,9 +158,12 @@ textarea {
 #dialog {
   display: none;
 }
-
+#new-todo-form {
+  margin-top: 100px;
+  margin-left: 20px;
+}
 /*LINKS*/
-a.btn, #submit-btn, #btn-structure, #new-todo-btn, #todo-done-btn {
+a.btn, #submit-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
  border:3px solid #2980b9;
  border-radius: 4px;
  padding: 5px;
@@ -163,6 +172,14 @@ a.btn, #submit-btn, #btn-structure, #new-todo-btn, #todo-done-btn {
  background-color: #ecf0f1;
  color: #8e44ad;
 }
+input[type=submit] {
+  border: none; /*rewriting standard style, it is necessary to be able to change the size*/
+  height: 50px;
+  width: 100px;
+  /*text-align: center;*/
+  margin: 0 auto;
+}
+
 
 #msg-step-2 {
   font-size: 300%

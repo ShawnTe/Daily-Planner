@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  $("#showTodoForm").hide()
+  $(".second-step-flex").hide()
   $("#msg-next-step").hide();
   hideNotesSection();
   draggableBoxes();
@@ -38,10 +40,15 @@ var resizableBoxes = function(){
 }
 
 var doneStructuringDay = function(){
-  $("#btn-structure").on('click', function() {
-    showTodoLists();
-    $(this).hide();
-    $("#first-step").hide();
+  $("#one").on('click', function() {
+    // showTodoLists();
+    $(".first-step-flex").hide()
+    $(".second-step-flex").show()
+    // $("#showNewTodoForm").show()
+    $("#dialog").show();
+    $("#showTodos").append($("#dialog"))
+    // $(this).hide();
+    // $("#first-step").hide();
   });
 }
 
@@ -51,7 +58,6 @@ var showTodoLists = function(){
       $("#low").hide();
       $("#high").toggle();
      $("#msg-next-step").hide();
-
     });
 
     $(".medium").on('click', function(){
@@ -68,6 +74,15 @@ var showTodoLists = function(){
       $("#medium").hide();
       $("#msg-next-step").hide();
     })
+ }
+
+ var doneEnteringTodos = function(){
+   $(".two").on('click', function() {
+     showTodoLists();
+     $(".first-step-flex").hide()
+     // $(this).hide();
+     // $("#first-step").hide();
+   });
  }
 
 var showNewTodoForm = function() {
@@ -201,5 +216,3 @@ var editNotes = function() {
 //     $("#dialog").dialog("open");
 //   });
 // };
-
-
