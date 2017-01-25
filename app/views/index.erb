@@ -1,15 +1,23 @@
 
 <div class="flex-item">
-  <div>
-    <h1>A Visual Planner<br>
+
+  <div class="col-one-container">
+
+    <div class="title">
+      <h1>A Visual Planner</h1>
       <% d = Time.now %>
-      <%= d.strftime("%e %B") %>
-    </h1>
-  </div>
-  <div id="first-step">
-    <h3> Step #1<br>Arrange the boxes to plan out your day.</h3>
-  </div>
+      <h2><%= d.strftime("%e %B") %></h2>
+    </div>
+    <div class="first-step-flex">
+      <h2>Step #1<br>Arrange the boxes to plan out your day.</h2>
+      <p>Click "Done" when finished.</p>
+      <div class="center">
+        <input type="button" id="btn-structure" value="Done">
+      </div>
+    </div>
+  <!-- </div> -->
   <div id="edit-form">
+  </div>
   </div>
 </div>
 
@@ -41,8 +49,6 @@
       </p>
     </div>
   </div>
-  <input type="button" id="btn-structure" value="Done structuring day">
-
 </div>
 
 <div class="flex-item" id="right-side">
