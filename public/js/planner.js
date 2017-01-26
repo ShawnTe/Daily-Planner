@@ -2,6 +2,7 @@ $(document).ready(function(){
 
   $("#showTodoForm").hide()
   $(".second-step-flex").hide()
+  $(".third-step-flex").hide()
   $("#msg-next-step").hide();
   hideNotesSection();
   draggableBoxes();
@@ -12,6 +13,7 @@ $(document).ready(function(){
   doneEnteringTodos();
   showNotes();
   editNotes();
+  showTodoLists();
 });
 
 
@@ -36,58 +38,64 @@ var resizableBoxes = function(){
     minHeight: 25,
     minWidth: 350,
   });
-
 }
 
 var doneStructuringDay = function(){
   $("#one").on('click', function() {
-    // showTodoLists();
+    console.log("I clicked first button. Done with structuring day.")
     $(".first-step-flex").hide()
     $(".second-step-flex").show()
-    // $("#showNewTodoForm").show()
     $("#dialog").show();
     $("#showTodos").append($("#dialog"))
-    // $(this).hide();
-    // $("#first-step").hide();
   });
 }
 
+$(document).on('click','#two',function(){
+     console.log("Woot!! Got #2")
+     $("#new-todo-form").hide()
+     $(".second-step-flex").hide()
+     $(".third-step-flex").show()
+})
+
+$(document).on('click','#three',function(){
+     console.log("Woot!! Got #3")
+     $(".third-step-flex").hide()
+})
+
+// document.getElementById("col-two").addEventListener("dblclick",function(e) {
+// 	// e.target was the clicked element
+//   if (e.target && e.target.matches("a.classA")) {
+//     console.log("Anchor element clicked!");
+// 	}
+// });
+
 var showTodoLists = function(){
-    $(".high").on('click', function(){
-      $("#medium").hide();
-      $("#low").hide();
-      $("#high").toggle();
-     $("#msg-next-step").hide();
-    });
+ $(".high").on('dblclick', function(){
+   $("#medium").hide();
+   $("#low").hide();
+   $("#high").toggle();
+   $("#msg-next-step").hide();
+ });
 
-    $(".medium").on('click', function(){
-      $("#high").hide();
-      $("#low").hide();
-      $("#medium").toggle();
-     $("#msg-next-step").hide();
+ $(".medium").on('dblclick', function(){
+   $("#high").hide();
+   $("#low").hide();
+   $("#medium").toggle();
+   $("#msg-next-step").hide();
+ })
 
-    })
-
-    $(".low").on('click', function(){
-      $("#low").toggle();
-      $("#high").hide();
-      $("#medium").hide();
-      $("#msg-next-step").hide();
-    })
- }
-
- var doneEnteringTodos = function(){
-   $(".two").on('click', function() {
-     showTodoLists();
-     $(".first-step-flex").hide()
-     // $(this).hide();
-     // $("#first-step").hide();
-   });
- }
+ $(".low").on('dblclick', function(){
+   $("#low").toggle();
+   $("#high").hide();
+   $("#medium").hide();
+   $("#msg-next-step").hide();
+ })
+}
 
 var showNewTodoForm = function() {
   $("#showTodoForm").on('click', function(event) {
     event.preventDefault();
+    console.log("in ShowNewTodoForm")
     $("#dialog").show();
     $("#showTodos").append($("#dialog"))
     $(this).hide();
@@ -153,7 +161,7 @@ var showNotes = function(){
 
 var editNotes = function() {
   $("#edit-form").on('submit', function(event) {
-    var todo_id = $("#edit-form form").attr("id")
+    console.log("in the editNotes function")
 
     event.preventDefault();
     var url = $("#edit-form form").attr("action");
@@ -168,9 +176,11 @@ var editNotes = function() {
         method: "PUT"
       })
       .done(function(a, b, c) {
+        console.log("in the done part of editNotes")
         whatFunctionIsThis(a, b, c, todo_id)
         $("#edit-form").hide();
         revised_todo = JSON.parse(a)
+        console.log(revised_todo + "How to update the list item?")
         if (revised_todo.completed == true) {
           $("[id = " + todo_id + " ]").parent().hide()
         }

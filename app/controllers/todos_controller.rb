@@ -81,6 +81,7 @@ end
 
 # Delete todos
 delete '/todos/:id' do
+  p "In the delete action"
+  @todo = Todo.delete(params[:id])
   redirect '/todos'
 end
-

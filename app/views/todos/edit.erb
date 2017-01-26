@@ -1,9 +1,7 @@
  <label for="notes-section"><%= @todo.name %></label>
   <form method="post" id="edit" action="/todos/<%= @todo.id %>">
     <input type="hidden" name="_method" value="put">
-    <textarea id="notes" name="notes" rows="20" cols = "50"><%= @todo.notes %></textarea>
+    <textarea id="notes" name="notes" rows="20" cols = "50">In the edit.erb form somehow <%= @todo.notes %></textarea>
     <input type="checkbox" name="completed">
     <input type="submit" value="Save changes to note">
   </form>
-
-

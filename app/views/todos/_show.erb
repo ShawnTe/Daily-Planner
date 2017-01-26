@@ -1,8 +1,43 @@
-<% @todos.where(completed:false).each do |task| %>
-  <% if task.brainjuice_id == 2 %>
-  <li>
-    (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit"
-    id="<%= task.id %>"> <%= task.name %></a>
-  </li>
-  <% end %>
+<% if @todos %>
+  <ul id="high">
+    <h3>High</h3>
+    <% @todos.where(completed:false).each do |task| %>
+      <% if task.brainjuice_id == 1 %>
+      <li id="<%= task.id %>">
+        (<%= task.time_est %> <em>min</em>) &nbsp; <%= task.name %></br>
+        show notes ||
+        <a href="/todos/<%= task.id %>/edit" > edit</a> ||
+        <form class="inline" action="/todos/<%= task.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="delete">
+        </form> ||
+        <form class="inline" action="/todos/<%= task.id %>" method="post">
+          <input type="hidden" name="_method" value="PUT">
+          <input type="submit" name="completed" value="done!">
+        </form>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <ul id="medium">
+    <h3>Medium</h3>
+    <% @todos.where(completed:false).each do |task| %>
+      <% if task.brainjuice_id == 2 %>
+      <li>
+        (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <ul id="low">
+    <h3>Low</h3>
+    <% @todos.where(completed:false).each do |task| %>
+      <% if task.brainjuice_id == 3 %>
+      <li>
+        (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
 <% end %>

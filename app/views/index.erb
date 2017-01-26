@@ -1,127 +1,32 @@
 
-<div class="flex-item">
-
+<div class="flex-item" id="col-one">
   <div class="col-one-container">
-
     <div class="title">
       <h1>A Visual Planner</h1>
       <% d = Time.now %>
       <h2><%= d.strftime("%e %B") %></h2>
     </div>
-    <div class="first-step-flex">
-      <h2>Step #1<br>Arrange the boxes to plan out your day.</h2>
-      <p>Click "Done" when finished.</p>
-      <div class="center">
-        <input type="button" id="one" class="btn-structure" value="Done">
-      </div>
+    <div id="steps">
+      <%= erb :'/index/_steps', layout: false  %>
     </div>
-    <div class="second-step-flex">
-      <h2>Step #2<br>Enter ToDos still in your head.</h2>
-      <p>Click "Done" when finished.</p>
-      <div class="center">
-        <input type="button" id="two" class="btn-structure" value="Done">
-      </div>
-    </div>
-  <!-- </div> -->
+  </div>
+</div>
+
+<div class="flex-item white" id="col-two">
+  <%= erb :'/index/_day_layout', layout: false  %>
+</div>
+
+<div class="flex-item" id="col-three">
+  <div id="dialog">
+    <%= erb :'/todos/_new_todo_form', layout: false  %>
+    <!-- <input type="button" id="todo-done-btn" class="hide" value="Done entering Todos"> -->
+    <!-- <h3 id="msg-next-step">Click on one of the Brain Juice boxes to see all tasks for that level.</h3> -->
+  </div>
+  <div id="showTodos">
+    <%= erb :'/todos/_show', layout: false  %>
+  </div>
+  <!-- <a class="btn" id="showTodoForm" href="/todos/new">Create new todo</a> -->
   <div id="edit-form">
   </div>
-  </div>
-</div>
 
-<div class="flex-item white" >
-  <div class="day_layout">
-    <div class="box routine">
-      <p class="text-box">
-        Morning Routine
-      </p>
-    </div>
-    <div class="box high">
-      <p class="text-box">
-        High Brain Juice
-      </p>
-    </div>
-    <div class="box routine">
-      <p class="text-box">
-        Lunch
-      </p>
-    </div>
-    <div class="box medium">
-      <p class="text-box">
-        Medium Brain Juice
-      </p>
-    </div>
-    <div class="box low">
-      <p class="text-box">
-       Low Brain Juice
-      </p>
-    </div>
-  </div>
-</div>
-
-<div class="flex-item" id="right-side">
-  <a class="btn" id="showTodoForm" href="/todos/new">Create new todo</a>
-    <div id="dialog">
-      <form action="/todos" method="post" id="new-todo-form">
-        <input type="text" placeholder="Whatcha need to do?" name="todo[name]" autofocus>
-        <div class="full-length">
-          <label for="time-est">How much time will it take?</label>
-          <select name="todo[time_est]" id="time-est">
-            <option>5 min</option>
-            <option>15 min</option>
-            <option>30 min</option>
-            <option>60 min</option>
-          </select>
-        </div>
-        <div class="full-length">
-          <label for="bj-new-todo">Brain juice level required?</label>
-          <select name="brainjuice_id" id="bj-new-todo">
-            <option>Medium</option>
-            <option>High</option>
-            <option>Low</option>
-          </select>
-        </div>
-        <div class="center">
-          <input type="submit" class="btn-structure" id="new-todo-btn" value="Got it">
-        <!-- <input type="button" id="one" class="btn-structure" value="Done"> -->
-        </div>
-      </form>
-      <!-- <input type="button" id="todo-done-btn" class="hide" value="Done entering Todos"> -->
-      <h3 id="msg-next-step">Click on one of the Brain Juice boxes to see all tasks for that level.</h3>
-
-    </div>
-  <div id="showTodos">
-    <% if @todos %>
-      <ul id="high">
-        <h3>High</h3>
-        <% @todos.where(completed:false).each do |task| %>
-          <% if task.brainjuice_id == 1 %>
-          <li>
-            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
-          </li>
-          <% end %>
-        <% end %>
-      </ul>
-      <ul id="medium">
-        <h3>Medium</h3>
-        <% @todos.where(completed:false).each do |task| %>
-          <% if task.brainjuice_id == 2 %>
-          <li>
-            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
-          </li>
-          <% end %>
-        <% end %>
-      </ul>
-
-      <ul id="low">
-        <h3>Low</h3>
-        <% @todos.where(completed:false).each do |task| %>
-          <% if task.brainjuice_id == 3 %>
-          <li>
-            (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
-          </li>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
 </div>

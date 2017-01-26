@@ -41,7 +41,7 @@ see learnlayout.com/flexbox.com
   background-color: #ecf0f1;
   margin-left: 20px;
 }
-.first-step-flex, .second-step-flex {
+.first-step-flex, .second-step-flex, .third-step-flex {
   margin-left: 20px;
   color: #2980b9;
 }
@@ -78,11 +78,18 @@ see learnlayout.com/flexbox.com
   content: "";
 }
 
+#edit-form {
+  margin-left: 20px;
+}
 
 input {
   /*margin: 10px;*/
   width: 95%;
-  height: 50px;
+  /*height: 50px;*/
+}
+select {
+  width: 150px;
+  margin-bottom: 10px;
 }
 .white {
   background-color: white;
@@ -100,18 +107,22 @@ li.nav {
 ul {
   list-style-type: none;
 }
-
+li {
+  margin-bottom: 10px;
+  border-bottom: 3px solid #bdc3c7;
+  width: 90%;
+}
 h1 {
   /*position: absolute;*/
   margin: auto;
   /*margin-bottom: 20px;*/
 }
 textarea {
-  margin-left: 8%;
-  margin-top: 30%;
-  width: 80%;
-  height: 300px;
-  font-size: 400%;
+  /*margin-left: 8%;*/
+  margin-top: 30px;
+  width: 95%;
+  height: 200px;
+  font-size: 100%;
 }
 .box {
   width: 350px;
@@ -172,14 +183,30 @@ a.btn, #submit-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
  background-color: #ecf0f1;
  color: #8e44ad;
 }
+#submit-btn {
+  font-size: 21px;
+}
 input[type=submit] {
   border: none; /*rewriting standard style, it is necessary to be able to change the size*/
   height: 50px;
-  width: 100px;
+  width: 150px;
   /*text-align: center;*/
   margin: 0 auto;
 }
-
+.inline {
+  /*display: inline;*/
+  /*margin  : 0px;*/
+  /*padding:0!important;*/
+display:inline-block;
+}
+.inline input[type=submit] {
+  background:none!important;
+  border:none;
+  width: auto;
+  /*margin: 0px;*/
+  /*display:inline-block;*/
+  padding:0!important;
+}
 
 #msg-step-2 {
   font-size: 300%
@@ -204,7 +231,7 @@ a {
  border-radius: 4px;
  line-height: 25px;
  padding: 8px;
- font-size: 150%
+ font-size: 80%
 }
 
 #check_completed {
