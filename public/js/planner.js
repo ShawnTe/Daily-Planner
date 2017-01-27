@@ -3,7 +3,6 @@ $(document).ready(function(){
   $("#showTodoForm").hide()
   $(".second-step-flex").hide()
   $(".third-step-flex").hide()
-  $("#msg-next-step").hide();
   hideNotesSection();
   draggableBoxes();
   resizableBoxes();
@@ -74,21 +73,16 @@ var showTodoLists = function(){
    $("#medium").hide();
    $("#low").hide();
    $("#high").toggle();
-   $("#msg-next-step").hide();
  });
-
  $(".medium").on('dblclick', function(){
    $("#high").hide();
    $("#low").hide();
    $("#medium").toggle();
-   $("#msg-next-step").hide();
  })
-
  $(".low").on('dblclick', function(){
    $("#low").toggle();
    $("#high").hide();
    $("#medium").hide();
-   $("#msg-next-step").hide();
  })
 }
 
@@ -137,7 +131,6 @@ var doneEnteringTodos = function() {
   $("#todo-done-btn").on('click', function() {
     $(this).hide();
     $("#new-todo-form").hide();
-    $("#msg-next-step").show();
   })
 }
 
@@ -162,34 +155,33 @@ var showNotes = function(){
 var editNotes = function() {
   $("#edit-form").on('submit', function(event) {
     console.log("in the editNotes function")
-
     event.preventDefault();
     var url = $("#edit-form form").attr("action");
     var todo_id = $("#edit-form form").attr("id")
     var formData = $("#edit-form form").serialize();
-  var whatFunctionIsThis = function() {
-    console.log("What to do here?")
+    var whatFunctionIsThis = function() {
+      console.log("What to do here?")
   }
-      $.ajax({
-        url: url,
-        data: formData,
-        method: "PUT"
-      })
-      .done(function(a, b, c) {
-        console.log("in the done part of editNotes")
-        whatFunctionIsThis(a, b, c, todo_id)
-        $("#edit-form").hide();
-        revised_todo = JSON.parse(a)
-        console.log(revised_todo + "How to update the list item?")
-        if (revised_todo.completed == true) {
-          $("[id = " + todo_id + " ]").parent().hide()
-        }
-      })
-      .fail(function(server_response) {
-        console.log(errThrown)
-      })
+    $.ajax({
+      url: url,
+      data: formData,
+      method: "PUT"
     })
-  }
+    .done(function(a, b, c) {
+      console.log("in the done part of editNotes")
+      whatFunctionIsThis(a, b, c, todo_id)
+      $("#edit-form").hide();
+      revised_todo = JSON.parse(a)
+      console.log(revised_todo + "Next: update the list item with Ajax")
+      if (revised_todo.completed == true) {
+        $("[id = " + todo_id + " ]").parent().hide()
+      }
+    })
+    .fail(function(server_response) {
+      console.log(errThrown)
+    })
+  })
+}
 
 
 

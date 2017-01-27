@@ -43,10 +43,6 @@ body {
 h1 {
   margin: auto;
 }
-h3.msg-next-step {
-  font-size: 300%
-  color: #2c3e50;
-}
 
 /* DAY LAYOUT */
 .day_layout {
