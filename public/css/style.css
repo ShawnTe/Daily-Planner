@@ -1,17 +1,6 @@
 body {
   font: 24px "Futura", Helvetica, Arial, sans-serif;
 }
-
-/*a {
-  color: #00B7FF;
-}*/
-
-/*.option-article {
-  column-count: 3;            // max # of columns
-  column-width: 300px;        // minimum width --- can do this? what if col 1 is empty? how will it collapse?
-}
-see learnlayout.com/flexbox.com
-*/
 .flex-container {
     display: -webkit-flex;
     display: flex;
@@ -29,6 +18,8 @@ see learnlayout.com/flexbox.com
   padding-top: 30px;
   background-color: #ecf0f1;
 }
+
+/* LEFT COLUMN & STEPS */
 .col-one-container {
   display: -webkit-flex;
   display: flex;
@@ -46,26 +37,18 @@ see learnlayout.com/flexbox.com
   color: #2980b9;
 }
 .center {
-  /*margin: auto;*/
   margin:auto;
-  /*margin-left: -20px;*/
   width: 100px;
 }
-/*.first-step  {
-  color: #2980b9;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}*/
-.container {
-  margin-top: 0px;
-  width: 100%;
+h1 {
+  margin: auto;
+}
+h3.msg-next-step {
+  font-size: 300%
+  color: #2c3e50;
 }
 
+/* DAY LAYOUT */
 .day_layout {
   padding-left: 30px;
   padding-top: 18px;
@@ -77,95 +60,58 @@ see learnlayout.com/flexbox.com
   border-radius: 20px;
   content: "";
 }
-
-#edit-form {
-  margin-left: 20px;
-}
-
-input {
-  /*margin: 10px;*/
-  width: 95%;
-  /*height: 50px;*/
-}
-select {
-  width: 150px;
-  margin-bottom: 10px;
-}
 .white {
   background-color: white;
-}
-.full-length {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-}
-li.nav {
-  display: inline-block;
-  margin-right: 15px;
-}
-
-ul {
-  list-style-type: none;
-}
-li {
-  margin-bottom: 10px;
-  border-bottom: 3px solid #bdc3c7;
-  width: 90%;
-}
-h1 {
-  /*position: absolute;*/
-  margin: auto;
-  /*margin-bottom: 20px;*/
-}
-textarea {
-  /*margin-left: 8%;*/
-  margin-top: 30px;
-  width: 95%;
-  height: 200px;
-  font-size: 100%;
 }
 .box {
   width: 350px;
   border-radius: 10px;
   cursor: pointer;
-
 }
-
 .text-box {
   text-align: center;
   font-size: 125%;
   color: white;
-
 }
-
 .high {
   margin: auto;
   background-color: #c0392b;
   height: 150px;
 }
-
 .medium {
   background-color: #f39c12;
   margin: auto;
   height: 80px;
 }
-
 .low {
   background-color: #1abc9c;
   margin: auto;
   height:80px;
 }
-
 .routine {
   background-color: #8e44ad;
   margin: auto;
   height: 40px;
 }
-
 #high, #medium, #low {
   display: none;
 }
 
+/* Todo LIST & EDIT*/
+.full-length {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.inline {
+display:inline-block;
+}
+.inline input[type=submit] {
+  background:none!important;
+  border:none;
+  width: auto;
+  padding:0!important;
+}
 #dialog {
   display: none;
 }
@@ -173,7 +119,20 @@ textarea {
   margin-top: 100px;
   margin-left: 20px;
 }
-/*LINKS*/
+#edit-form {
+  margin-left: 20px;
+}
+#complete-task {
+ color: #ecf0f1;
+ background-color: #d35400;
+ border-radius: 4px;
+ line-height: 25px;
+ padding: 8px;
+ font-size: 80%
+}
+#submit-btn {
+  font-size: 21px;
+}
 a.btn, #submit-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
  border:3px solid #2980b9;
  border-radius: 4px;
@@ -183,8 +142,33 @@ a.btn, #submit-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
  background-color: #ecf0f1;
  color: #8e44ad;
 }
-#submit-btn {
-  font-size: 21px;
+ul {
+  list-style-type: none;
+}
+li {
+  margin-bottom: 10px;
+  border-bottom: 3px solid #bdc3c7;
+  width: 90%;
+}
+li.nav {
+  display: inline-block;
+  margin-right: 15px;
+}
+textarea {
+  /*margin-left: 8%;*/
+  margin-top: 30px;
+  width: 95%;
+  height: 200px;
+  font-size: 100%;
+}
+a {
+  text-decoration: none;
+  padding: 3px;
+}
+input {
+  /*margin: 10px;*/
+  width: 95%;
+  /*height: 50px;*/
 }
 input[type=submit] {
   border: none; /*rewriting standard style, it is necessary to be able to change the size*/
@@ -193,69 +177,19 @@ input[type=submit] {
   /*text-align: center;*/
   margin: 0 auto;
 }
-.inline {
-  /*display: inline;*/
-  /*margin  : 0px;*/
-  /*padding:0!important;*/
-display:inline-block;
-}
-.inline input[type=submit] {
-  background:none!important;
-  border:none;
-  width: auto;
-  /*margin: 0px;*/
-  /*display:inline-block;*/
-  padding:0!important;
+select {
+  width: 150px;
+  margin-bottom: 10px;
 }
 
-#msg-step-2 {
-  font-size: 300%
-  color: #2c3e50;
-}
-
-
-h3.msg-next-step {
-  font-size: 300%
-  color: #2c3e50;
-  /*color: #2980b9;*/
-}
-
-a {
-  text-decoration: none;
-  padding: 3px;
-}
-
-#complete-task {
- color: #ecf0f1;
- background-color: #d35400;
- border-radius: 4px;
- line-height: 25px;
- padding: 8px;
- font-size: 80%
-}
-
-#check_completed {
-  /*display: none;*/
-}
-
-/*@media screen and (max-width: 800px) {
-    .box2 {
-        float: left;
-    }
-
-    .box1,.box2,.box3 {
-        width: 100%;
-    }*/
-
-
-/*turquoise #1abc9c
+/* COLORS
+turquoise     #1abc9c
 yellow-orange #f39c12
-pumpkin #d35400
-red #c0392b
-purple #8e44ad
-dark gray #2c3e50
-med gray #7f8c8d
-light gray #bdc3c7
-really light gray #ecf0f1
-
-blue #2980b9*/
+pumpkin       #d35400
+red           #c0392b
+purple        #8e44ad
+dark gray     #2c3e50
+med gray      #7f8c8d
+light gray    #bdc3c7
+v. light gray #ecf0f1
+blue          #2980b9 */
