@@ -4,17 +4,18 @@
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 1 %>
       <li id="<%= task.id %>">
-        (<%= task.time_est %> <em>min</em>) &nbsp; <%= task.name %></br>
-        show notes ||
-        <a href="/todos/<%= task.id %>/edit" > edit</a> ||
-        <form class="inline" action="/todos/<%= task.id %>" method="post">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="submit" value="delete">
-        </form> ||
+        (<%= task.time_est %> <em>min</em>) &nbsp;
         <form class="inline" action="/todos/<%= task.id %>" method="post">
           <input type="hidden" name="_method" value="PUT">
-          <input type="submit" name="completed" value="done!">
-        </form>
+          <input type="submit" name="completed">
+        <i class="fa fa-square-o fa-lg" aria-hidden="true" id="complete-thing-number-<%= task.id %>"></i>
+      </form>
+          &nbsp;
+        <a href="/todos/<%= task.id %>/edit" ><%= task.name %></a>
+        <!-- <form class="inline" action="/todos/<%= task.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="delete">
+        </form> -->
       </li>
       <% end %>
     <% end %>

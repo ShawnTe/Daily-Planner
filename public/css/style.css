@@ -126,10 +126,10 @@ display:inline-block;
  padding: 8px;
  font-size: 80%
 }
-#submit-btn {
+#submit-edits-btn {
   font-size: 21px;
 }
-a.btn, #submit-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
+a.btn, #submit-edits-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
  border:3px solid #2980b9;
  border-radius: 4px;
  padding: 5px;
@@ -189,3 +189,8 @@ med gray      #7f8c8d
 light gray    #bdc3c7
 v. light gray #ecf0f1
 blue          #2980b9 */
+
+/*Font Awesomes*/
+/* <i class="fa fa-sticky-note-o" aria-hidden="true"></i> */
+/* <i class="fa fa-pencil" aria-hidden="true"></i> */
+/* x for delete <i class="fa fa-times" aria-hidden="true"></i> */

@@ -10,8 +10,9 @@ $(document).ready(function(){
   showNewTodoForm();
   submitNewTodo();
   doneEnteringTodos();
-  showNotes();
-  editNotes();
+  showDetails();
+  // saveChanges();
+  // editNotes();
   showTodoLists();
 });
 
@@ -70,6 +71,7 @@ $(document).on('click','#three',function(){
 
 var showTodoLists = function(){
  $(".high").on('dblclick', function(){
+   console.log("Double clicked High BJ")
    $("#medium").hide();
    $("#low").hide();
    $("#high").toggle();
@@ -134,9 +136,10 @@ var doneEnteringTodos = function() {
   })
 }
 
-var showNotes = function(){
+var showDetails = function(){
   $("#showTodos").on('click', 'a', function(){
     event.preventDefault();
+    console.log("in the showDetails function")
     var url = $(this).val("href").attr("href")
     $.ajax({
       url:  url,
@@ -145,6 +148,7 @@ var showNotes = function(){
       var edit_form = JSON.parse(server_response)
       $("#edit-form").empty().append(edit_form)
       $("#edit-form").show();
+      // Still todo: add active to the right drop downs
     })
     .fail(function(server_response) {
       alert(server_response.error)
@@ -152,13 +156,23 @@ var showNotes = function(){
   })
 }
 
-var editNotes = function() {
-  $("#edit-form").on('submit', function(event) {
-    console.log("in the editNotes function")
+$(document).on('click','#submit-edits-btn', function(){   // This is picking up
+     console.log("Woot!! Got submit-edits-btn")
+     saveChanges();
+    //  debugger
+    //  $(".third-step-flex").hide()
+})
+
+var saveChanges = function() {
+  // $("#submit-edits-btn").on('submit', 'form', function(event) {   // this must not be picking up
     event.preventDefault();
+    console.log("in the saveChanges function")    // not showing in console
+    console.log(event)
     var url = $("#edit-form form").attr("action");
     var todo_id = $("#edit-form form").attr("id")
     var formData = $("#edit-form form").serialize();
+    console.log(formData)
+    debugger
     var whatFunctionIsThis = function() {
       console.log("What to do here?")
   }
@@ -168,7 +182,7 @@ var editNotes = function() {
       method: "PUT"
     })
     .done(function(a, b, c) {
-      console.log("in the done part of editNotes")
+      console.log("in the done part of saveChanges")
       whatFunctionIsThis(a, b, c, todo_id)
       $("#edit-form").hide();
       revised_todo = JSON.parse(a)
@@ -180,8 +194,39 @@ var editNotes = function() {
     .fail(function(server_response) {
       console.log(errThrown)
     })
-  })
+  // })
 }
+
+// var editNotes = function() {
+//   $("#edit-form").on('submit', function(event) {
+//     console.log("in the editNotes function")
+//     event.preventDefault();
+//     var url = $("#edit-form form").attr("action");
+//     var todo_id = $("#edit-form form").attr("id")
+//     var formData = $("#edit-form form").serialize();
+//     var whatFunctionIsThis = function() {
+//       console.log("What to do here?")
+//   }
+//     $.ajax({
+//       url: url,
+//       data: formData,
+//       method: "PUT"
+//     })
+//     .done(function(a, b, c) {
+//       console.log("in the done part of editNotes")
+//       whatFunctionIsThis(a, b, c, todo_id)
+//       $("#edit-form").hide();
+//       revised_todo = JSON.parse(a)
+//       console.log(revised_todo + "Next: update the list item with Ajax")
+//       if (revised_todo.completed == true) {
+//         $("[id = " + todo_id + " ]").parent().hide()
+//       }
+//     })
+//     .fail(function(server_response) {
+//       console.log(errThrown)
+//     })
+//   })
+// }
 
 
 
