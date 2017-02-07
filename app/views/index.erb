@@ -9,6 +9,8 @@
     <div id="steps">
       <%= erb :'/index/_steps', layout: false  %>
     </div>
+    <div id="edit-form">
+    </div>
   </div>
 </div>
 
@@ -17,15 +19,16 @@
 </div>
 
 <div class="flex-item" id="col-three">
-  <div id="dialog">
+
+  <div id="showTodoForm">
     <%= erb :'/todos/_new_todo_form', layout: false  %>
     <!-- <input type="button" id="todo-done-btn" class="hide" value="Done entering Todos"> -->
   </div>
+  <!-- <div id="linkToShowTodoForm">
+    <a href="/todos/new">[enter new ToDo]</a>
+  </div> -->
   <div id="showTodos">
     <%= erb :'/todos/_show', layout: false  %>
   </div>
   <!-- <a class="btn" id="showTodoForm" href="/todos/new">Create new todo</a> -->
-  <div id="edit-form">
-  </div>
-
 </div>

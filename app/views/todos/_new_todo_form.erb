@@ -6,8 +6,10 @@
   <div class="full-length">
     <%= erb :'/todos/_brainjuice_select', layout: false  %>
   </div>
+  <textarea id="notes" name="todo[notes]" placeholder="Notes (optional)" rows="20" cols = "50"></textarea><br>
+
   <div class="center">
-    <input type="submit" class="btn-structure" id="new-todo-btn" value="Got it">
+    <input type="submit" class="btn-structure" id="new-todo-btn" value="Enter">
   <!-- <input type="button" id="one" class="btn-structure" value="Done"> -->
   </div>
 </form>

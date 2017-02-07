@@ -3,17 +3,23 @@ $(document).ready(function(){
   $("#showTodoForm").hide()
   $(".second-step-flex").hide()
   $(".third-step-flex").hide()
+  $("#linkToShowTodoForm").hide();
   hideNotesSection();
   draggableBoxes();
   resizableBoxes();
   doneStructuringDay();
-  showNewTodoForm();
+  // showNewTodoForm();
   submitNewTodo();
   doneEnteringTodos();
-  showDetails();
+  // showDetails();
   // saveChanges();
   // editNotes();
   showTodoLists();
+
+//   var el = document.getElementById('high')
+//   console.log(el);
+//   console.log("Why null?")
+//   el.addEventListener('click', saveChanges );
 });
 
 
@@ -45,8 +51,8 @@ var doneStructuringDay = function(){
     console.log("I clicked first button. Done with structuring day.")
     $(".first-step-flex").hide()
     $(".second-step-flex").show()
-    $("#dialog").show();
-    $("#showTodos").append($("#dialog"))
+    $("#showTodoForm").show();
+    $("#showTodos").append($("#showTodoForm"))
   });
 }
 
@@ -72,6 +78,7 @@ $(document).on('click','#three',function(){
 var showTodoLists = function(){
  $(".high").on('dblclick', function(){
    console.log("Double clicked High BJ")
+   $("#linkToShowTodoForm").show();
    $("#medium").hide();
    $("#low").hide();
    $("#high").toggle();
@@ -88,22 +95,34 @@ var showTodoLists = function(){
  })
 }
 
-var showNewTodoForm = function() {
-  $("#showTodoForm").on('click', function(event) {
+
+
+// $('#showTodos').on('click', '#linkToShowTodoForm', function (event) {
+//     event.preventDefault();
+//     console.log("yeahhhh!!! but this doesn't work for me :(");
+//     debugger
+// });
+
+
+$(document).on('click','#linkToShowTodoForm', function(){   // This is picking up
+
+// var showNewTodoForm = function() {
+  // $("#showTodoForm").on('click', function(event) {
     event.preventDefault();
     console.log("in ShowNewTodoForm")
-    $("#dialog").show();
-    $("#showTodos").append($("#dialog"))
+    $("#showTodoForm").show();
+    $("#showTodos").prepend($("#showTodoForm"))
     $(this).hide();
-  })
-}
+  // })
+})
 
 var submitNewTodo = function() {
-  $("#dialog").on('submit', function(event) {
+  $("#showTodoForm").on('submit', function(event) {
     event.preventDefault();
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
-    $('#new-todo-form').find('input:text').val('');
+    $('#new-todo-form').find('input:text').val('');``
+    $('#new-todo-form').find('textarea').val('');
     $.ajax({
       url: url,
       method: "POST",
@@ -122,6 +141,7 @@ var submitNewTodo = function() {
         $( "ul#low li" ).first().prepend(
           "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
       }
+
     })
   .fail(function(server_response) {
       alert(server_response.error)
@@ -136,24 +156,33 @@ var doneEnteringTodos = function() {
   })
 }
 
+
+$(document).on('click','#showDetails', function(){   // This is picking up
+     console.log("Woot!! Got showDetails button")
+     event.preventDefault();
+     var url = $(this).val("href").attr("href")
+     console.log(this)
+     console.log(this.parent)
+     $.ajax({
+       url:  url,
+     })
+     .done(function(server_response) {
+       var edit_form = JSON.parse(server_response);
+       $(".second-step-flex").hide();
+       $(".third-step-flex").hide();
+       $("#edit-form").empty().append(edit_form);
+       $("#edit-form").show();
+     })
+     .fail(function(server_response) {
+       alert(server_response.error)
+     })
+})
+
 var showDetails = function(){
-  $("#showTodos").on('click', 'a', function(){
-    event.preventDefault();
+  // $("#showTodos").on('click', 'a', function(){
+  // event.preventDefault();
     console.log("in the showDetails function")
-    var url = $(this).val("href").attr("href")
-    $.ajax({
-      url:  url,
-    })
-    .done(function(server_response) {
-      var edit_form = JSON.parse(server_response)
-      $("#edit-form").empty().append(edit_form)
-      $("#edit-form").show();
-      // Still todo: add active to the right drop downs
-    })
-    .fail(function(server_response) {
-      alert(server_response.error)
-    })
-  })
+  // })
 }
 
 $(document).on('click','#submit-edits-btn', function(){   // This is picking up
@@ -164,18 +193,17 @@ $(document).on('click','#submit-edits-btn', function(){   // This is picking up
 })
 
 var saveChanges = function() {
-  // $("#submit-edits-btn").on('submit', 'form', function(event) {   // this must not be picking up
+  // $("#showTodos").on('submit', 'form', function() {           // this must not be picking up
     event.preventDefault();
-    console.log("in the saveChanges function")    // not showing in console
+    console.log("in the saveChanges function")
     console.log(event)
     var url = $("#edit-form form").attr("action");
     var todo_id = $("#edit-form form").attr("id")
     var formData = $("#edit-form form").serialize();
     console.log(formData)
-    debugger
-    var whatFunctionIsThis = function() {
-      console.log("What to do here?")
-  }
+  //   var whatFunctionIsThis = function() {
+  //     console.log("What to do here?")
+  // }
     $.ajax({
       url: url,
       data: formData,
@@ -183,19 +211,32 @@ var saveChanges = function() {
     })
     .done(function(a, b, c) {
       console.log("in the done part of saveChanges")
-      whatFunctionIsThis(a, b, c, todo_id)
+      // whatFunctionIsThis(a, b, c, todo_id)
       $("#edit-form").hide();
       revised_todo = JSON.parse(a)
-      console.log(revised_todo + "Next: update the list item with Ajax")
+      console.log ("revised_todo:")
+      console.log(revised_todo)
+      debugger
+
       if (revised_todo.completed == true) {
-        $("[id = " + todo_id + " ]").parent().hide()
+        $("[id = " + revised_id + " ]").parent().hide()
       }
+      var liOfItem = $(revised_todo.id)
+      // if (revised_todo.id == liOfItem) {
+      //   $("[id = " + revised_id + " ]").parent().hide()
+      // }
+      // debugger
     })
     .fail(function(server_response) {
       console.log(errThrown)
+      console.log(server_response)
     })
   // })
 }
+
+
+
+
 
 // var editNotes = function() {
 //   $("#edit-form").on('submit', function(event) {
@@ -248,9 +289,9 @@ var saveChanges = function() {
 
 
 
-// Pops up jqueryui dialog box. I don't like how it looks:
+// Pops up jqueryui showTodoForm box. I don't like how it looks:
 // var showNewTodoForm = function() {
-//   $("#dialog").dialog({
+//   $("#showTodoForm").showTodoForm({
 //       autoOpen: false,
 //       minHeight: 250,
 //       position: {
@@ -260,6 +301,6 @@ var saveChanges = function() {
 //     });
 //   $("#button").on('click', function(){
 //     event.preventDefault();
-//     $("#dialog").dialog("open");
+//     $("#showTodoForm").showTodoForm("open");
 //   });
 // };

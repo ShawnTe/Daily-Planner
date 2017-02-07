@@ -6,8 +6,8 @@
 
   <textarea id="notes" name="notes" rows="20" cols = "50"><%= @todo.notes %></textarea><br>
 
-  <%= erb :'/todos/_brainjuice_select', layout: false  %>
-  <%= erb :'/todos/_time_est_select', layout: false  %>
+  <%= erb :'/todos/_brainjuice_select', layout: false, locals: {task: @todo, brainjuice_name: @bj_name}  %>
+  <%= erb :'/todos/_time_est_select', layout: false, locals: {task: @todo }  %>
 
   <!-- <label>Check when done </label> -->
   <!-- <label id="complete-task" for="check_completed">Mark this complete</label><br> -->

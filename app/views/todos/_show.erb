@@ -1,5 +1,6 @@
 <% if @todos %>
   <ul id="high">
+    <a href="/todos/new" id="linkToShowTodoForm">[add another ToDo]</a>
     <h3>High</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 1 %>
@@ -8,10 +9,10 @@
         <form class="inline" action="/todos/<%= task.id %>" method="post">
           <input type="hidden" name="_method" value="PUT">
           <input type="submit" name="completed">
-        <i class="fa fa-square-o fa-lg" aria-hidden="true" id="complete-thing-number-<%= task.id %>"></i>
-      </form>
+          <i class="fa fa-square-o fa-lg" aria-hidden="true" id="complete-thing-number-<%= task.id %>"></i>
+        </form>
           &nbsp;
-        <a href="/todos/<%= task.id %>/edit" ><%= task.name %></a>
+        <a href="/todos/<%= task.id %>/edit" id="showDetails"><%= task.name %></a>
         <!-- <form class="inline" action="/todos/<%= task.id %>" method="post">
           <input type="hidden" name="_method" value="DELETE">
           <input type="submit" value="delete">
