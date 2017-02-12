@@ -48,6 +48,7 @@ get '/todos/:id/edit' do
   @todo = Todo.find(params["id"])
   p @todo.id
   @bj_name = bj_name
+  p @bj_name
   if request.xhr?
     response = erb :'/todos/_edit', layout: false, locals: {task: @todo, brainjuice_name: @bj_name}
     response.to_json

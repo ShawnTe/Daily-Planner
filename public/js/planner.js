@@ -97,7 +97,6 @@ $(document).on('click','#linkToShowTodoForm', function(){
 $(document).on('click','#new-todo-btn', function(){
     event.preventDefault();
     $("#new-todo-btn").removeClass("success")
-
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
     $.ajax({
@@ -110,11 +109,9 @@ $(document).on('click','#new-todo-btn', function(){
       $("#new-todo-btn").addClass("success")
       $('#new-todo-form').find('input:text').val('');
       $('#new-todo-form').find('textarea').val('');
-      // $("#new-todo-btn").removeClass("success")
-
       if (task.brainjuice_id == 1) {
        $( "ul#high li" ).first().prepend(
-        "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
+        "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
       } else if (task.brainjuice_id ==2) {
         $( "ul#medium li" ).first().prepend(
          "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
@@ -137,16 +134,17 @@ $(document).on('click','#showDetails', function(){   // This is picking up
      event.preventDefault();
      var url = $(this).val("href").attr("href")
      console.log(this)
-     console.log(this.parent)
      $.ajax({
        url:  url,
      })
      .done(function(server_response) {
        var edit_form = JSON.parse(server_response);
-       $(".second-step-flex").hide();
-       $(".third-step-flex").hide();
+       console.log(edit_form);
+       $(".first-step-flex").addClass("hidden")
+       $(".second-step-flex").addClass("hidden")
+       $(".third-step-flex").addClass("hidden")
        $("#edit-form").empty().append(edit_form);
-       $("#edit-form").show();
+       $("#edit-form").removeClass("hidden");
      })
      .fail(function(server_response) {
        alert(server_response.error)
@@ -163,8 +161,6 @@ var showDetails = function(){
 $(document).on('click','#submit-edits-btn', function(){   // This is picking up
      console.log("Woot!! Got submit-edits-btn")
      saveChanges();
-    //  debugger
-    //  $(".third-step-flex").hide()
 })
 
 var saveChanges = function() {
@@ -208,74 +204,3 @@ var saveChanges = function() {
     })
   // })
 }
-
-
-
-
-
-// var editNotes = function() {
-//   $("#edit-form").on('submit', function(event) {
-//     console.log("in the editNotes function")
-//     event.preventDefault();
-//     var url = $("#edit-form form").attr("action");
-//     var todo_id = $("#edit-form form").attr("id")
-//     var formData = $("#edit-form form").serialize();
-//     var whatFunctionIsThis = function() {
-//       console.log("What to do here?")
-//   }
-//     $.ajax({
-//       url: url,
-//       data: formData,
-//       method: "PUT"
-//     })
-//     .done(function(a, b, c) {
-//       console.log("in the done part of editNotes")
-//       whatFunctionIsThis(a, b, c, todo_id)
-//       $("#edit-form").hide();
-//       revised_todo = JSON.parse(a)
-//       console.log(revised_todo + "Next: update the list item with Ajax")
-//       if (revised_todo.completed == true) {
-//         $("[id = " + todo_id + " ]").parent().hide()
-//       }
-//     })
-//     .fail(function(server_response) {
-//       console.log(errThrown)
-//     })
-//   })
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Pops up jqueryui showTodoForm box. I don't like how it looks:
-// var showNewTodoForm = function() {
-//   $("#showTodoForm").showTodoForm({
-//       autoOpen: false,
-//       minHeight: 250,
-//       position: {
-//                   my: "right center",
-//                   at: "right center"
-//                }
-//     });
-//   $("#button").on('click', function(){
-//     event.preventDefault();
-//     $("#showTodoForm").showTodoForm("open");
-//   });
-// };
