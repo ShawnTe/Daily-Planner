@@ -87,7 +87,6 @@ $(document).on('click','#completed-the-thing',function(){
        })
 })
 
-
 $(document).on('click','#linkToShowTodoForm', function(){
     event.preventDefault();
     console.log("in ShowNewTodoForm");
@@ -97,18 +96,22 @@ $(document).on('click','#linkToShowTodoForm', function(){
 
 $(document).on('click','#new-todo-btn', function(){
     event.preventDefault();
+    $("#new-todo-btn").removeClass("success")
+
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
-    $('#new-todo-form').find('input:text').val('');``
-    $('#new-todo-form').find('textarea').val('');
     $.ajax({
       url: url,
       method: "POST",
       data: formData
     })
     .done(function(server_response) {
-      $("#todo-done-btn").show();
       var task = JSON.parse(server_response)
+      $("#new-todo-btn").addClass("success")
+      $('#new-todo-form').find('input:text').val('');
+      $('#new-todo-form').find('textarea').val('');
+      // $("#new-todo-btn").removeClass("success")
+
       if (task.brainjuice_id == 1) {
        $( "ul#high li" ).first().prepend(
         "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
