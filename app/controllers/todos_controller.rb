@@ -11,12 +11,11 @@ end
 
 # Create new todos
 post '/todos' do
-  p params
   todo = Todo.new(params[:todo])
   todo.brainjuice_id = bj_id(params[:brainjuice_id])
+  todo.time_est = params[:time_est].to_i
   if todo.save
     if request.xhr?
-      p "in the new todo save and xhr"
       todo.to_json
     else
       redirect '/todos'
@@ -31,10 +30,10 @@ end
 
 # Show specific todos
 get '/todos/:id' do
-  @todo = Todo.find(params[:id])
-  if @todo
+  todo = Todo.find(params[:id])
+  if todo
     if request.xhr?
-      @todo.to_json
+      todo.to_json
     else
       erb :show
     end
@@ -45,8 +44,11 @@ end
 
 # Form to edit todo
 get '/todos/:id/edit' do
+  p 'in the edit todo controller'
   @todo = Todo.find(params["id"])
+  p @todo.id
   @bj_name = bj_name
+  p @bj_name
   if request.xhr?
     response = erb :'/todos/_edit', layout: false, locals: {task: @todo, brainjuice_name: @bj_name}
     response.to_json
@@ -58,23 +60,31 @@ end
 # Update a todo
 put '/todos/:id' do
   todo = Todo.find(params[:id])
-
-  todo.name = params[:name]
-  todo.notes = params[:notes]
-  todo.time_est = params[:time_est]
-  todo.brainjuice_id = bj_id(params[:brainjuice_id])
-  if params[:completed]
-    todo.update(completed: true)
+  p "in the Todo Update Controller"
+  if params[:_method] == "PUT"
+    # todo.completed = true
+    p "yes, tis true that the method is PUT"
+    todo.update_column("completed", true)
+  else
+    p params[:_method]
+    p "This is in the else"
+    todo.name = params[:name]
+    todo.notes = params[:notes]
+    todo.time_est = params[:time_est]
+    todo.brainjuice_id = bj_id(params[:brainjuice_id])
   end
-
   if todo.save
     if request.xhr?
+      p 'in the saved put controller xhr section'
       todo.to_json
     else
+      p "redirecting why would this be??????"
       redirect "/todos"
     end
   else
+    @errors = todo.errors.full_messages
   end
+
 end
 
 

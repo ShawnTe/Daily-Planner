@@ -6,20 +6,8 @@
 
   <textarea id="notes" name="notes" rows="20" cols = "50"><%= @todo.notes %></textarea><br>
 
-  <%= erb :'/todos/_brainjuice_select', layout: false  %>
+  <%= erb :'/todos/_brainjuice_select', layout: false, locals: {task: @todo, brainjuice_name: @bj_name}  %>
+  <%= erb :'/todos/_time_est_select', layout: false, locals: {task: @todo }  %>
 
-  <%= erb :'/todos/_time_est_select', layout: false  %>
-
-  <!-- <label>Check when done </label> -->
-
-  <!-- <label id="complete-task" for="check_completed">Mark this complete</label><br> -->
-  <!-- <input type="checkbox" id="check_completed"  name="completed"><br> -->
-  <!-- <label><input type="checkbox" /> Click it</label> -->
-  <!-- <div>
-     <label><input type="checkbox" /> Label text</label>
-   </div> -->
-   <!-- <label><input type="checkbox" name="checkbox" value="value">Text</label> -->
-
-
-  <input type="submit" name="btn" id="submit-btn" value="Save changes">
+  <input type="submit" name="btn" id="submit-edits-btn" value="Save changes">
 </form>

@@ -1,3 +1,5 @@
+<input type="button" class="btn-structure" id="todo-done-btn" value="Done entering Todos">
+
 <form action="/todos" method="post" id="new-todo-form">
   <input type="text" placeholder="Whatcha need to do?" name="todo[name]" autofocus>
   <div class="full-length">
@@ -6,8 +8,9 @@
   <div class="full-length">
     <%= erb :'/todos/_brainjuice_select', layout: false  %>
   </div>
+  <textarea id="notes" name="todo[notes]" placeholder="Notes (optional)" rows="20" cols = "50"></textarea><br>
+
   <div class="center">
-    <input type="submit" class="btn-structure" id="new-todo-btn" value="Got it">
-  <!-- <input type="button" id="one" class="btn-structure" value="Done"> -->
+    <input type="submit" class="btn-structure" id="new-todo-btn" value="Enter">
   </div>
 </form>
