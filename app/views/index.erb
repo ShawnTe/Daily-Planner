@@ -21,14 +21,11 @@
 <div class="flex-item" id="col-three">
 
   <div id="showTodoForm" class="hidden">
+    <input type="button" class="btn-structure" id="todo-done-btn" value="Done entering Todos">
     <%= erb :'/todos/_new_todo_form', layout: false  %>
-    <!-- <input type="button" id="todo-done-btn" class="hide" value="Done entering Todos"> -->
   </div>
-  <!-- <div id="linkToShowTodoForm">
-    <a href="/todos/new">[enter new ToDo]</a>
-  </div> -->
+
   <div id="showTodos">
     <%= erb :'/todos/_show', layout: false  %>
   </div>
-  <!-- <a class="btn" id="showTodoForm" href="/todos/new">Create new todo</a> -->
 </div>

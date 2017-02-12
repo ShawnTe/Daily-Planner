@@ -105,8 +105,7 @@ $(document).on('click','#linkToShowTodoForm', function(){
     $("#showTodoForm").removeClass("hidden");
 })
 
-$(document).on('click','#new-todo-form', function(){   // This is picking up
-
+$(document).on('click','#new-todo-btn', function(){
     event.preventDefault();
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
@@ -130,7 +129,6 @@ $(document).on('click','#new-todo-form', function(){   // This is picking up
         $( "ul#low li" ).first().prepend(
           "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
       }
-
     })
   .fail(function(server_response) {
       alert(server_response.error)
