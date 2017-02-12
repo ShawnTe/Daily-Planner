@@ -108,7 +108,7 @@ display:inline-block;
   width: auto;
   padding:0!important;
 }
-#dialog {
+.hidden {
   display: none;
 }
 #new-todo-form {
@@ -177,7 +177,9 @@ select {
   width: 150px;
   margin-bottom: 10px;
 }
-
+.delete-item {
+  display: none;
+}
 /* COLORS
 turquoise     #1abc9c
 yellow-orange #f39c12

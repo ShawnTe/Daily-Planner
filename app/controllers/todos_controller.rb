@@ -11,17 +11,11 @@ end
 
 # Create new todos
 post '/todos' do
-  p params
   todo = Todo.new(params[:todo])
   todo.brainjuice_id = bj_id(params[:brainjuice_id])
   todo.time_est = params[:time_est].to_i
-  p todo.notes
-  p todo.name
-  p params[:todo]
   if todo.save
     if request.xhr?
-      p "in the new todo save and xhr"
-      # p todo
       todo.to_json
     else
       redirect '/todos'
@@ -65,27 +59,31 @@ end
 # Update a todo
 put '/todos/:id' do
   todo = Todo.find(params[:id])
-p "in the Todo put Controller"
-  todo.name = params[:name]
-  todo.notes = params[:notes]
-  todo.time_est = params[:time_est]
-  p todo.time_est = params[:time_est]
-
-  todo.brainjuice_id = bj_id(params[:brainjuice_id])
-  if params[:completed]
-    todo.update(completed: true)
+  p "in the Todo Update Controller"
+  if params[:_method] == "PUT"
+    # todo.completed = true
+    p "yes, tis true that the method is PUT"
+    todo.update_column("completed", true)
+  else
+    p params[:_method]
+    p "This is in the else"
+    todo.name = params[:name]
+    todo.notes = params[:notes]
+    todo.time_est = params[:time_est]
+    todo.brainjuice_id = bj_id(params[:brainjuice_id])
   end
-
   if todo.save
     if request.xhr?
       p 'in the saved put controller xhr section'
-      p todo
       todo.to_json
     else
+      p "redirecting why would this be??????"
       redirect "/todos"
     end
   else
+    @errors = todo.errors.full_messages
   end
+
 end
 
 

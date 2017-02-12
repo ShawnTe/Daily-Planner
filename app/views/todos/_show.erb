@@ -6,10 +6,15 @@
       <% if task.brainjuice_id == 1 %>
       <li id="<%= task.id %>">
         (<%= task.time_est %> <em>min</em>) &nbsp;
-        <form class="inline" action="/todos/<%= task.id %>" method="post">
+        <!-- <form class="inline" action="/todos/<%= task.id %>" method="post">
           <input type="hidden" name="_method" value="PUT">
           <input type="submit" name="completed">
-          <i class="fa fa-square-o fa-lg" aria-hidden="true" id="complete-thing-number-<%= task.id %>"></i>
+          <i class="fa fa-square-o fa-lg" aria-hidden="true" id="completed-the-thing"></i>
+        </form> -->
+        <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
+          <input type="hidden" name="_method" value="PUT">
+          <input type="image" value="box.png" src="images/box.png" >
+          <!-- <i class="fa fa-square-o fa-lg" aria-hidden="true" id="completed-the-thing"></i> -->
         </form>
           &nbsp;
         <a href="/todos/<%= task.id %>/edit" id="showDetails"><%= task.name %></a>

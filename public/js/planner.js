@@ -1,25 +1,20 @@
 $(document).ready(function(){
 
-  $("#showTodoForm").hide()
-  $(".second-step-flex").hide()
-  $(".third-step-flex").hide()
+  // $("#showTodoForm").hide()
+  // $(".second-step-flex").hide()
+  // $(".third-step-flex").hide()
   $("#linkToShowTodoForm").hide();
   hideNotesSection();
   draggableBoxes();
   resizableBoxes();
   doneStructuringDay();
   // showNewTodoForm();
-  submitNewTodo();
+  // submitNewTodo();
   doneEnteringTodos();
   // showDetails();
   // saveChanges();
   // editNotes();
   showTodoLists();
-
-//   var el = document.getElementById('high')
-//   console.log(el);
-//   console.log("Why null?")
-//   el.addEventListener('click', saveChanges );
 });
 
 
@@ -48,32 +43,24 @@ var resizableBoxes = function(){
 
 var doneStructuringDay = function(){
   $("#one").on('click', function() {
-    console.log("I clicked first button. Done with structuring day.")
-    $(".first-step-flex").hide()
-    $(".second-step-flex").show()
-    $("#showTodoForm").show();
-    $("#showTodos").append($("#showTodoForm"))
+    console.log("Clicked first button. Done with structuring day.")
+    $(".first-step-flex").addClass("hidden");
+    $(".second-step-flex").removeClass("hidden");
+    $("#showTodoForm").removeClass("hidden");
   });
 }
 
 $(document).on('click','#two',function(){
      console.log("Woot!! Got #2")
-     $("#new-todo-form").hide()
-     $(".second-step-flex").hide()
-     $(".third-step-flex").show()
+     $("#showTodoForm").addClass("hidden");
+     $(".second-step-flex").addClass("hidden");
+     $(".third-step-flex").removeClass("hidden");
 })
 
 $(document).on('click','#three',function(){
      console.log("Woot!! Got #3")
-     $(".third-step-flex").hide()
+     $(".third-step-flex").addClass("hidden");
 })
-
-// document.getElementById("col-two").addEventListener("dblclick",function(e) {
-// 	// e.target was the clicked element
-//   if (e.target && e.target.matches("a.classA")) {
-//     console.log("Anchor element clicked!");
-// 	}
-// });
 
 var showTodoLists = function(){
  $(".high").on('dblclick', function(){
@@ -95,29 +82,31 @@ var showTodoLists = function(){
  })
 }
 
-
-
-// $('#showTodos').on('click', '#linkToShowTodoForm', function (event) {
-//     event.preventDefault();
-//     console.log("yeahhhh!!! but this doesn't work for me :(");
-//     debugger
-// });
-
-
-$(document).on('click','#linkToShowTodoForm', function(){   // This is picking up
-
-// var showNewTodoForm = function() {
-  // $("#showTodoForm").on('click', function(event) {
-    event.preventDefault();
-    console.log("in ShowNewTodoForm")
-    $("#showTodoForm").show();
-    $("#showTodos").prepend($("#showTodoForm"))
-    $(this).hide();
-  // })
+$(document).on('click','#completed-the-thing',function(){
+     console.log("Got the clickie box of doneness")
+     var url = $(this).attr("action")
+     $.ajax({
+       url: url,
+       method: "PUT"
+     })
+     .done(function(server_response) {
+       console.log("Why is the whole list disappearing?")
+       debugger
+     })
+     .fail(function(server_response) {
+         alert(server_response.error)
+       })
 })
 
-var submitNewTodo = function() {
-  $("#showTodoForm").on('submit', function(event) {
+
+$(document).on('click','#linkToShowTodoForm', function(){
+    event.preventDefault();
+    console.log("in ShowNewTodoForm")
+    $("#showTodoForm").removeClass("hidden");
+})
+
+$(document).on('click','#new-todo-form', function(){   // This is picking up
+
     event.preventDefault();
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
@@ -146,8 +135,7 @@ var submitNewTodo = function() {
   .fail(function(server_response) {
       alert(server_response.error)
     })
-  })
-}
+})
 
 var doneEnteringTodos = function() {
   $("#todo-done-btn").on('click', function() {
