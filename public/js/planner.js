@@ -1,19 +1,8 @@
 $(document).ready(function(){
-
-  // $("#showTodoForm").hide()
-  // $(".second-step-flex").hide()
-  // $(".third-step-flex").hide()
-  $("#linkToShowTodoForm").hide();
   hideNotesSection();
   draggableBoxes();
   resizableBoxes();
   doneStructuringDay();
-  // showNewTodoForm();
-  // submitNewTodo();
-  doneEnteringTodos();
-  // showDetails();
-  // saveChanges();
-  // editNotes();
   showTodoLists();
 });
 
@@ -65,7 +54,7 @@ $(document).on('click','#three',function(){
 var showTodoLists = function(){
  $(".high").on('dblclick', function(){
    console.log("Double clicked High BJ")
-   $("#linkToShowTodoForm").show();
+   $("#linkToShowTodoForm").removeClass("hidden")
    $("#medium").hide();
    $("#low").hide();
    $("#high").toggle();
@@ -101,8 +90,9 @@ $(document).on('click','#completed-the-thing',function(){
 
 $(document).on('click','#linkToShowTodoForm', function(){
     event.preventDefault();
-    console.log("in ShowNewTodoForm")
+    console.log("in ShowNewTodoForm");
     $("#showTodoForm").removeClass("hidden");
+    $(this).addClass("hidden");
 })
 
 $(document).on('click','#new-todo-btn', function(){
@@ -135,13 +125,9 @@ $(document).on('click','#new-todo-btn', function(){
     })
 })
 
-var doneEnteringTodos = function() {
-  $("#todo-done-btn").on('click', function() {
-    $(this).hide();
-    $("#new-todo-form").hide();
+$(document).on('click','#todo-done-btn', function(){
+    $("#showTodoForm").addClass("hidden");
   })
-}
-
 
 $(document).on('click','#showDetails', function(){   // This is picking up
      console.log("Woot!! Got showDetails button")
