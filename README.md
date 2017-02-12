@@ -3,12 +3,12 @@
 ## Summary
 The Daily Planner is a more visually friendly ToDo SPA.  
 
-This is an ongoing learning project. Steps to learn different skills are:
-1. Sinatra app with CSS and JS/Ajax (current status)
-2. Decouple app (Rails API backend)
-3. React front end
-4. SVG calendar
-5. Mobile version
+This is an ongoing learning project. Steps to learn different skills are:  
+1. Sinatra app with CSS and JS/Ajax (current status)  
+2. Decouple app (Rails API backend)  
+3. React front end  
+4. SVG calendar  
+5. Mobile version  
 
 ### MVP
 - User can view one day - Today
