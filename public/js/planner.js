@@ -111,7 +111,7 @@ $(document).on('click','#new-todo-btn', function(){
       $('#new-todo-form').find('textarea').val('');
       if (task.brainjuice_id == 1) {
        $( "ul#high li" ).first().prepend(
-        "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
+        "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
       } else if (task.brainjuice_id ==2) {
         $( "ul#medium li" ).first().prepend(
          "<li>(" + task.time_est + " <em>min</em>) <a href=\"/todos/" + task.id + "/edit\"> &nbsp;" + task.name + "</a></li>" );
@@ -129,7 +129,7 @@ $(document).on('click','#todo-done-btn', function(){
     $("#showTodoForm").addClass("hidden");
   })
 
-$(document).on('click','#showDetails', function(){   // This is picking up
+$(document).on('click','#showDetails', function(){ 
      console.log("Woot!! Got showDetails button")
      event.preventDefault();
      var url = $(this).val("href").attr("href")
