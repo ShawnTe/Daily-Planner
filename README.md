@@ -24,3 +24,11 @@ This is an ongoing learning project. Steps to learn different skills are:
 - User sees prepopulated time containers
 - Time containers connected to Google Cal api
 - Containers sized by session duration
+
+### Good things
+- New Todo submit button flashed on .done function
+- SPA
+- Learning the Ajax!
+- Flexbox
+- Using partials
+- jQueryUI for draggable and resizeable boxes
