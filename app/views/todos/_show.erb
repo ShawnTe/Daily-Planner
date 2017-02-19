@@ -10,7 +10,7 @@
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
           <input type="hidden" name="_method" value="PUT">
           <input type="hidden" name="todo[completed]" value="true">
-          <input type="image" value="box.png" src="images/box.png" >
+          <i class="fa fa-square-o" aria-hidden="true"></i>
         </form>
           &nbsp;
         <a href="/todos/<%= task.id %>/edit" id="showDetails"><%= task.name %></a>
@@ -33,7 +33,7 @@
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
           <input type="hidden" name="_method" value="PUT">
           <input type="hidden" name="todo[completed]" value="true">
-          <input type="image" value="box.png" src="images/box.png" >
+          <i class="fa fa-square-o" aria-hidden="true"></i>
         </form>
           &nbsp;
         <a href="/todos/<%= task.id %>/edit" id="showDetails"><%= task.name %></a>
@@ -57,7 +57,7 @@
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
           <input type="hidden" name="_method" value="PUT">
           <input type="hidden" name="todo[completed]" value="true">
-          <input type="image" value="box.png" src="images/box.png" >
+          <i class="fa fa-square-o" aria-hidden="true"></i>
         </form>
           &nbsp;
         <a href="/todos/<%= task.id %>/edit" id="showDetails"><%= task.name %></a>
