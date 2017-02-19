@@ -57,22 +57,22 @@ get '/todos/:id/edit' do
   end
 end
 
+
 # Update a todo
 put '/todos/:id' do
   todo = Todo.find(params[:id])
   p "in the Todo Update Controller"
-  if params[:_method] == "PUT"
-    # todo.completed = true
-    p "yes, tis true that the method is PUT"
-    todo.update_column("completed", true)
-  else
-    p params[:_method]
-    p "This is in the else"
-    todo.name = params[:name]
-    todo.notes = params[:notes]
-    todo.time_est = params[:time_est]
-    todo.brainjuice_id = bj_id(params[:brainjuice_id])
+  p params
+  p "todo at beginning: "
+  p todo
+  if params[:todo][:completed] == "true"
+    todo.update_attribute(:completed, 't')
   end
+  # todo.name = params[:name]
+  # todo.notes = params[:notes]
+  # todo.time_est = params[:time_est]
+  # todo.brainjuice_id = bj_id(params[:brainjuice_id])
+
   if todo.save
     if request.xhr?
       p 'in the saved put controller xhr section'
@@ -84,10 +84,15 @@ put '/todos/:id' do
   else
     @errors = todo.errors.full_messages
   end
-
 end
 
-
+# if params[:_method] == "PUT"
+# todo.completed = true
+# p "yes, tis true that the method is PUT"
+# todo.update_column("completed", true)
+# p todo
+# p params[:_method]
+# p "This is in the else"
 
 # Delete todos
 delete '/todos/:id' do

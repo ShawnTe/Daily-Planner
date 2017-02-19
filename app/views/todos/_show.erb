@@ -9,6 +9,7 @@
 
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
           <input type="hidden" name="_method" value="PUT">
+          <input type="hidden" name="todo[completed]" value="true">
           <input type="image" value="box.png" src="images/box.png" >
         </form>
           &nbsp;
@@ -22,22 +23,48 @@
     <% end %>
   </ul>
   <ul id="medium">
+    <a href="/todos/new" class="hidden" id="linkToShowTodoForm">[add another ToDo]</a>
     <h3>Medium</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 2 %>
-      <li>
-        (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
+      <li id="<%= task.id %>">
+        (<%= task.time_est %> <em>min</em>) &nbsp;
+
+        <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
+          <input type="hidden" name="_method" value="PUT">
+          <input type="hidden" name="todo[completed]" value="true">
+          <input type="image" value="box.png" src="images/box.png" >
+        </form>
+          &nbsp;
+        <a href="/todos/<%= task.id %>/edit" id="showDetails"><%= task.name %></a>
+        <!-- <form class="inline" action="/todos/<%= task.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="delete">
+        </form> -->
       </li>
       <% end %>
     <% end %>
   </ul>
 
   <ul id="low">
+    <a href="/todos/new" class="hidden" id="linkToShowTodoForm">[add another ToDo]</a>
     <h3>Low</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 3 %>
-      <li>
-        (<%= task.time_est%> <em>min</em>) &nbsp; <a href="/todos/<%= task.id %>/edit" id="<%= task.id %>"><%= task.name %></a>
+      <li id="<%= task.id %>">
+        (<%= task.time_est %> <em>min</em>) &nbsp;
+
+        <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
+          <input type="hidden" name="_method" value="PUT">
+          <input type="hidden" name="todo[completed]" value="true">
+          <input type="image" value="box.png" src="images/box.png" >
+        </form>
+          &nbsp;
+        <a href="/todos/<%= task.id %>/edit" id="showDetails"><%= task.name %></a>
+        <!-- <form class="inline" action="/todos/<%= task.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="delete">
+        </form> -->
       </li>
       <% end %>
     <% end %>

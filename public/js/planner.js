@@ -72,19 +72,22 @@ var showTodoLists = function(){
 }
 
 $(document).on('click','#completed-the-thing',function(){
-     console.log("Got the clickie box of doneness")
-     var url = $(this).attr("action")
-     $.ajax({
-       url: url,
-       method: "PUT"
+   event.preventDefault();
+   console.log("Got the clickie box of doneness")
+   var url = $(this).attr("action")
+   var formData = $(this).serialize();
+   $.ajax({
+     url: url,
+     method: "PUT",
+     data: formData
+   })
+   .done(function(server_response) {
+     var todo = JSON.parse(server_response)
+     $("#" + todo.id).hide();
+   })
+   .fail(function(server_response) {
+       alert(server_response.error)
      })
-     .done(function(server_response) {
-       console.log("Why is the whole list disappearing?")
-       debugger
-     })
-     .fail(function(server_response) {
-         alert(server_response.error)
-       })
 })
 
 $(document).on('click','#linkToShowTodoForm', function(){
@@ -99,6 +102,7 @@ $(document).on('click','#new-todo-btn', function(){
     $("#new-todo-btn").removeClass("success")
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
+    console.log(formData)
     $.ajax({
       url: url,
       method: "POST",
