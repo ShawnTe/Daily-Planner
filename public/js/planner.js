@@ -102,6 +102,7 @@ $(document).on('click','#new-todo-btn', function(){
     $("#new-todo-btn").removeClass("success")
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
+    console.log(formData)
     $.ajax({
       url: url,
       method: "POST",
@@ -135,15 +136,21 @@ $(document).on('click','#todo-done-btn', function(){
 $(document).on('click','#showDetails', function(){
      console.log("Woot!! Got showDetails button")
      event.preventDefault();
+    //  $(".first-step-flex").hide();
+    //  $(".second-step-flex").hide();
+    //  $(".third-step-flex").hide();
      var url = $(this).val("href").attr("href")
+     console.log(this)
      $.ajax({
        url:  url,
      })
      .done(function(server_response) {
        var edit_form = JSON.parse(server_response);
+       console.log("Should be showing in 1 which is hidden");
        $(".first-step-flex").addClass("hidden")
        $(".second-step-flex").addClass("hidden")
        $(".third-step-flex").addClass("hidden")
+      //  $("#edit-form").removeClass("hidden");
        $("#edit-form").show();
        $("#edit-form").empty().append(edit_form);
      })
@@ -152,16 +159,19 @@ $(document).on('click','#showDetails', function(){
      })
 })
 
-$(document).on('click','#submit-edits-btn', function(){
+$(document).on('click','#submit-edits-btn', function(){   // This is picking up
      console.log("Woot!! Got submit-edits-btn")
      saveChanges();
 })
 
 var saveChanges = function() {
+  // $("#showTodos").on('submit', 'form', function() {           // this must not be picking up
+    event.preventDefault();
     console.log("in the saveChanges function")
     var url = $("#edit-form form").attr("action");
     var todo_id = $("#edit-form form").attr("id")
     var formData = $("#edit-form form").serialize();
+    console.log(formData)
     var whatFunctionIsThis = function() {
       console.log("What to do here?")
   }
@@ -173,9 +183,13 @@ var saveChanges = function() {
     .done(function(a, b, c) {
       console.log("in the done part of saveChanges")
       whatFunctionIsThis(a, b, c, todo_id)
+
       $("#edit-form").hide();
       revised_todo = JSON.parse(a)
+      console.log ("revised_todo id:")
+      console.log(revised_todo.id)
       $("#todo-" + revised_todo.id).hide();
+
       if (revised_todo.brainjuice_id == 1) {
        $( "ul#high li" ).first().prepend(
         "<li id=\"" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
@@ -191,4 +205,5 @@ var saveChanges = function() {
     .fail(function(server_response) {
       console.log(server_response)
     })
+  // })
 }
