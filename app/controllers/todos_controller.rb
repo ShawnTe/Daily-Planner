@@ -65,14 +65,16 @@ put '/todos/:id' do
   p params
   p "todo at beginning: "
   p todo
-  if params[:todo][:completed] == "true"
+  if params[:completed] == "true"
     todo.update_attribute(:completed, 't')
   end
-  # todo.name = params[:name]
-  # todo.notes = params[:notes]
-  # todo.time_est = params[:time_est]
-  # todo.brainjuice_id = bj_id(params[:brainjuice_id])
-
+  brainjuice = bj_id(params[:brainjuice_id])
+  todo.update(name: params[:name], notes: params[:notes], time_est: params[:time_est], brainjuice_id: brainjuice)
+  p params[:name]
+  p params[:notes]
+  p params[:time_est]
+  p "todo at after UPDATE: "
+  p todo
   if todo.save
     if request.xhr?
       p 'in the saved put controller xhr section'

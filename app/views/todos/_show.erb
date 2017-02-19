@@ -4,12 +4,12 @@
     <h3>High</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 1 %>
-      <li id="todo_<%= task.id %>">
+      <li id="todo-<%= task.id %>">
         (<%= task.time_est %> <em>min</em>) &nbsp;
 
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
           <input type="hidden" name="_method" value="PUT">
-          <input type="hidden" name="todo[completed]" value="true">
+          <input type="hidden" name="completed" value="true">
           <i class="fa fa-square-o" aria-hidden="true"></i>
         </form>
           &nbsp;
@@ -27,7 +27,7 @@
     <h3>Medium</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 2 %>
-      <li id="<%= task.id %>">
+      <li id="todo-<%= task.id %>">
         (<%= task.time_est %> <em>min</em>) &nbsp;
 
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
@@ -52,7 +52,7 @@
     <h3>Low</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 3 %>
-      <li id="<%= task.id %>">
+      <li id="todo-<%= task.id %>">
         (<%= task.time_est %> <em>min</em>) &nbsp;
 
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">

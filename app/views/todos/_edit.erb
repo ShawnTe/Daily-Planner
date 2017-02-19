@@ -1,5 +1,6 @@
 <form method="post" id="edit_<%= @todo.id %>" action="/todos/<%= @todo.id %>">
   <input type="hidden" name="_method" value="put">
+  <input type="hidden" name="completed" value=false>
 
   <label>To Do: </label>
     <input type="text" name="name" value="<%= @todo.name %>">

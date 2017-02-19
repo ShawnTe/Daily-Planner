@@ -83,7 +83,7 @@ $(document).on('click','#completed-the-thing',function(){
    })
    .done(function(server_response) {
      var todo = JSON.parse(server_response)
-     $("#" + todo.id).hide();
+     $("#todo-" + todo.id).hide();
    })
    .fail(function(server_response) {
        alert(server_response.error)
@@ -102,7 +102,6 @@ $(document).on('click','#new-todo-btn', function(){
     $("#new-todo-btn").removeClass("success")
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
-    console.log(formData)
     $.ajax({
       url: url,
       method: "POST",
@@ -136,47 +135,36 @@ $(document).on('click','#todo-done-btn', function(){
 $(document).on('click','#showDetails', function(){
      console.log("Woot!! Got showDetails button")
      event.preventDefault();
-     $(".first-step-flex").hide();
-     $(".second-step-flex").hide();
-     $(".third-step-flex").hide();
      var url = $(this).val("href").attr("href")
-     console.log(this)
      $.ajax({
        url:  url,
      })
      .done(function(server_response) {
        var edit_form = JSON.parse(server_response);
-       console.log(edit_form);
        $(".first-step-flex").addClass("hidden")
        $(".second-step-flex").addClass("hidden")
        $(".third-step-flex").addClass("hidden")
+       $("#edit-form").show();
        $("#edit-form").empty().append(edit_form);
-       $("#edit-form").removeClass("hidden");
      })
      .fail(function(server_response) {
        alert(server_response.error)
      })
 })
 
-$(document).on('click','#submit-edits-btn', function(){   // This is picking up
+$(document).on('click','#submit-edits-btn', function(){
      console.log("Woot!! Got submit-edits-btn")
      saveChanges();
 })
 
 var saveChanges = function() {
-  // $("#showTodos").on('submit', 'form', function() {           // this must not be picking up
-    event.preventDefault();
     console.log("in the saveChanges function")
-    // console.log(event)
     var url = $("#edit-form form").attr("action");
     var todo_id = $("#edit-form form").attr("id")
     var formData = $("#edit-form form").serialize();
-    console.log(formData)
     var whatFunctionIsThis = function() {
       console.log("What to do here?")
   }
-  debugger
-
     $.ajax({
       url: url,
       data: formData,
@@ -187,22 +175,20 @@ var saveChanges = function() {
       whatFunctionIsThis(a, b, c, todo_id)
       $("#edit-form").hide();
       revised_todo = JSON.parse(a)
-      console.log ("revised_todo:")
-      console.log(revised_todo)
-      debugger
-
-      if (revised_todo.completed == true) {
-        $("[id = " + revised_id + " ]").parent().hide()
+      $("#todo-" + revised_todo.id).hide();
+      if (revised_todo.brainjuice_id == 1) {
+       $( "ul#high li" ).first().prepend(
+        "<li id=\"" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
+      } else if (revised_todo.brainjuice_id ==2) {
+        $( "ul#medium li" ).first().prepend(
+        "<li id=\"" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
+      } else {
+        $( "ul#low li" ).first().prepend(
+        "<li id=\"" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
       }
-      var liOfItem = $(revised_todo.id)
-      // if (revised_todo.id == liOfItem) {
-      //   $("[id = " + revised_id + " ]").parent().hide()
-      // }
-      // debugger
+      // NEED TO REFACTOR
     })
     .fail(function(server_response) {
-      console.log(errThrown)
       console.log(server_response)
     })
-  // })
 }
