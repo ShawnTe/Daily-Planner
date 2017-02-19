@@ -115,13 +115,13 @@ $(document).on('click','#new-todo-btn', function(){
       $('#new-todo-form').find('textarea').val('');
       if (task.brainjuice_id == 1) {
        $( "ul#high li" ).first().prepend(
-        "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+          "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
       } else if (task.brainjuice_id ==2) {
         $( "ul#medium li" ).first().prepend(
-        "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+          "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
       } else {
         $( "ul#low li" ).first().prepend(
-          "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+          "<li>(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + task.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
       }
     })
   .fail(function(server_response) {
@@ -136,11 +136,7 @@ $(document).on('click','#todo-done-btn', function(){
 $(document).on('click','#showDetails', function(){
      console.log("Woot!! Got showDetails button")
      event.preventDefault();
-    //  $(".first-step-flex").hide();
-    //  $(".second-step-flex").hide();
-    //  $(".third-step-flex").hide();
      var url = $(this).val("href").attr("href")
-     console.log(this)
      $.ajax({
        url:  url,
      })
@@ -165,7 +161,6 @@ $(document).on('click','#submit-edits-btn', function(){   // This is picking up
 })
 
 var saveChanges = function() {
-  // $("#showTodos").on('submit', 'form', function() {           // this must not be picking up
     event.preventDefault();
     console.log("in the saveChanges function")
     var url = $("#edit-form form").attr("action");
@@ -191,19 +186,18 @@ var saveChanges = function() {
       $("#todo-" + revised_todo.id).hide();
 
       if (revised_todo.brainjuice_id == 1) {
-       $( "ul#high li" ).first().prepend(
-        "<li id=\"#todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"image\" value=\"box.png\" src=\"images/box.png\" ></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
+        $( "ul#high li" ).first().prepend(
+          "<li id=\"#todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
       } else if (revised_todo.brainjuice_id ==2) {
         $( "ul#medium li" ).first().prepend(
-        "<li id=\"#todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
+          "<li id=\"#todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
       } else {
         $( "ul#low li" ).first().prepend(
-        "<li id=\"#todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
+          "<li id=\"#todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/\"" + revised_todo.id + " method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
       }
       // NEED TO REFACTOR
     })
     .fail(function(server_response) {
       console.log(server_response)
     })
-  // })
 }
