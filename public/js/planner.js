@@ -160,9 +160,12 @@ var doneEnteringTodos = function() {
 $(document).on('click','#showDetails', function(){   // This is picking up
      console.log("Woot!! Got showDetails button")
      event.preventDefault();
+     $(".first-step-flex").hide();
+     $(".second-step-flex").hide();
+     $(".third-step-flex").hide();
      var url = $(this).val("href").attr("href")
      console.log(this)
-     console.log(this.parent)
+    //  console.log(this.parent)
      $.ajax({
        url:  url,
      })
@@ -196,14 +199,16 @@ var saveChanges = function() {
   // $("#showTodos").on('submit', 'form', function() {           // this must not be picking up
     event.preventDefault();
     console.log("in the saveChanges function")
-    console.log(event)
+    // console.log(event)
     var url = $("#edit-form form").attr("action");
     var todo_id = $("#edit-form form").attr("id")
     var formData = $("#edit-form form").serialize();
     console.log(formData)
-  //   var whatFunctionIsThis = function() {
-  //     console.log("What to do here?")
-  // }
+    var whatFunctionIsThis = function() {
+      console.log("What to do here?")
+  }
+  debugger
+  
     $.ajax({
       url: url,
       data: formData,
@@ -211,7 +216,7 @@ var saveChanges = function() {
     })
     .done(function(a, b, c) {
       console.log("in the done part of saveChanges")
-      // whatFunctionIsThis(a, b, c, todo_id)
+      whatFunctionIsThis(a, b, c, todo_id)
       $("#edit-form").hide();
       revised_todo = JSON.parse(a)
       console.log ("revised_todo:")

@@ -4,7 +4,7 @@
     <h3>High</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 1 %>
-      <li id="<%= task.id %>">
+      <li id="todo_<%= task.id %>">
         (<%= task.time_est %> <em>min</em>) &nbsp;
 
         <form class="inline" action="/todos/<%= task.id %>" method="post" id="completed-the-thing">
@@ -40,6 +40,7 @@
         <!-- <form class="inline" action="/todos/<%= task.id %>" method="post">
           <input type="hidden" name="_method" value="DELETE">
           <input type="submit" value="delete">
+          <i class="fa fa-times" aria-hidden="true"></i>
         </form> -->
       </li>
       <% end %>
@@ -64,6 +65,7 @@
         <!-- <form class="inline" action="/todos/<%= task.id %>" method="post">
           <input type="hidden" name="_method" value="DELETE">
           <input type="submit" value="delete">
+          <i class="fa fa-times" aria-hidden="true"></i>
         </form> -->
       </li>
       <% end %>

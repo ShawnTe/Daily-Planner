@@ -1,4 +1,4 @@
-<form method="post" id="<%= @todo.id %>" action="/todos/<%= @todo.id %>">
+<form method="post" id="edit_<%= @todo.id %>" action="/todos/<%= @todo.id %>">
   <input type="hidden" name="_method" value="put">
 
   <label>To Do: </label>
