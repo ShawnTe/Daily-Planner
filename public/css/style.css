@@ -104,15 +104,18 @@ display:inline-block;
 }
 .inline input[type=submit] {
   background:none!important;
-  border:none;
+  /*border:none;*/
   width: auto;
   padding:0!important;
 }
-#dialog {
+.no-border {
+  border: none;
+}
+.hidden {
   display: none;
 }
 #new-todo-form {
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: 20px;
 }
 #edit-form {
@@ -129,7 +132,14 @@ display:inline-block;
 #submit-edits-btn {
   font-size: 21px;
 }
-a.btn, #submit-edits-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
+#todo-done-btn {
+  width: 250px;
+  height: 50px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: -10px;
+}
+a.btn, #submit-edits-btn, .btn-structure {
  border:3px solid #2980b9;
  border-radius: 4px;
  padding: 5px;
@@ -137,6 +147,19 @@ a.btn, #submit-edits-btn, .btn-structure, #new-todo-btn, #todo-done-btn {
  margin-bottom: 10px;
  background-color: #ecf0f1;
  color: #8e44ad;
+}
+.success {
+  animation-name: stretch;
+  animation-duration: .3s;
+  animation-iteration-count: 1;
+}
+@keyframes stretch {
+  0%, 100% {
+    background-color: #ecf0f1;
+  }
+  50% {
+    background-color: #f39c12;
+  }
 }
 ul {
   list-style-type: none;
@@ -167,7 +190,7 @@ input {
   /*height: 50px;*/
 }
 input[type=submit] {
-  border: none; /*rewriting standard style, it is necessary to be able to change the size*/
+  /*border: none; /*rewriting standard style, it is necessary to be able to change the size*/*/
   height: 50px;
   width: 150px;
   /*text-align: center;*/
@@ -177,7 +200,9 @@ select {
   width: 150px;
   margin-bottom: 10px;
 }
-
+.delete-item {
+  display: none;
+}
 /* COLORS
 turquoise     #1abc9c
 yellow-orange #f39c12
@@ -194,3 +219,4 @@ blue          #2980b9 */
 /* <i class="fa fa-sticky-note-o" aria-hidden="true"></i> */
 /* <i class="fa fa-pencil" aria-hidden="true"></i> */
 /* x for delete <i class="fa fa-times" aria-hidden="true"></i> */
+/*<i class="fa fa-square-o" aria-hidden="true"></i>*/
