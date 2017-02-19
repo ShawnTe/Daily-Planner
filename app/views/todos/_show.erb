@@ -1,6 +1,6 @@
 <% if @todos %>
   <ul id="high">
-    <a href="/todos/new" class="hidden" id="linkToShowTodoForm">[add another ToDo]</a>
+    <a href="/todos/new" id="linkToShowTodoForm">[add another ToDo]</a>
     <h3>High</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 1 %>
@@ -23,7 +23,7 @@
     <% end %>
   </ul>
   <ul id="medium">
-    <a href="/todos/new" class="hidden" id="linkToShowTodoForm">[add another ToDo]</a>
+    <a href="/todos/new" id="linkToShowTodoForm">[add another ToDo]</a>
     <h3>Medium</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 2 %>
@@ -48,7 +48,7 @@
   </ul>
 
   <ul id="low">
-    <a href="/todos/new" class="hidden" id="linkToShowTodoForm">[add another ToDo]</a>
+    <a href="/todos/new" id="linkToShowTodoForm">[add another ToDo]</a>
     <h3>Low</h3>
     <% @todos.where(completed:false).each do |task| %>
       <% if task.brainjuice_id == 3 %>
