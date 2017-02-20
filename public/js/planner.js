@@ -53,18 +53,19 @@ $(document).on('click','#three',function(){
 
 var showTodoLists = function(){
  $(".high").on('dblclick', function(){
-   console.log("Double clicked High BJ")
    $("#linkToShowTodoForm").removeClass("hidden")
    $("#medium").hide();
    $("#low").hide();
    $("#high").toggle();
  });
  $(".medium").on('dblclick', function(){
+   $("#linkToShowTodoForm").removeClass("hidden")
    $("#high").hide();
    $("#low").hide();
    $("#medium").toggle();
  })
  $(".low").on('dblclick', function(){
+   $("#linkToShowTodoForm").removeClass("hidden")
    $("#low").toggle();
    $("#high").hide();
    $("#medium").hide();
