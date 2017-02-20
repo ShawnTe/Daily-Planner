@@ -94,6 +94,19 @@ $(document).on('click','#linkToShowTodoForm', function(){
     $(this).addClass("hidden");
 })
 
+var addListItem = function(task) {
+  if (task.brainjuice_id == 1) {
+   $( "ul#high li" ).first().before(
+      "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+  } else if (task.brainjuice_id == 2) {
+    $( "ul#medium li" ).first().before(
+      "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+  } else {
+    $( "ul#low li" ).first().before(
+      "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+  }
+}
+
 $(document).on('click','#new-todo-btn', function(){
     event.preventDefault();
     $("#new-todo-btn").removeClass("success")
@@ -109,16 +122,7 @@ $(document).on('click','#new-todo-btn', function(){
       $("#new-todo-btn").addClass("success")
       $('#new-todo-form').find('input:text').val('');
       $('#new-todo-form').find('textarea').val('');
-      if (task.brainjuice_id == 1) {
-       $( "ul#high li" ).first().before(
-          "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
-      } else if (task.brainjuice_id ==2) {
-        $( "ul#medium li" ).first().before(
-          "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
-      } else {
-        $( "ul#low li" ).first().before(
-          "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
-      }
+      addListItem(task);
     })
   .fail(function(server_response) {
       alert(server_response.error)
@@ -172,18 +176,7 @@ var saveChanges = function() {
       $("#edit-form").hide();
       revised_todo = JSON.parse(a)
       $("#todo-" + revised_todo.id).remove();
-
-      if (revised_todo.brainjuice_id == 1) {
-        $( "ul#high li" ).first().before(
-          "<li id=\"todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + revised_todo.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
-      } else if (revised_todo.brainjuice_id ==2) {
-        $( "ul#medium li" ).first().before(
-          "<li id=\"todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + revised_todo.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
-      } else {
-        $( "ul#low li" ).first().before(
-          "<li id=\"todo-" + revised_todo.id + "\">(" + revised_todo.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + revised_todo.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + revised_todo.id + "/edit\" id=\"showDetails\"> &nbsp;" + revised_todo.name + "</a></li>" );
-      }
-      // NEED TO REFACTOR
+      addListItem(revised_todo);
     })
     .fail(function(server_response) {
       console.log(server_response)
