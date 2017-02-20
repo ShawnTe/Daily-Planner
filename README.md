@@ -2,10 +2,10 @@
 
 ## Summary
 The Daily Planner is a more visually friendly ToDo SPA.  
-
+  
 This is an ongoing learning project. Steps to learn different skills are:  
-1. Sinatra app with CSS and JS/Ajax [On Heroku](https://visual-daily-planner.herokuapp.com/todos) 
-2. Decouple app (Rails API backend)  (current status) 
+1. Sinatra app with CSS and JS/Ajax [On Heroku](https://visual-daily-planner.herokuapp.com/todos)   
+2. Decouple app (Rails API backend)  (current status)  
 3. React front end  
 4. SVG calendar  
 5. Mobile version  
