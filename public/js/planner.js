@@ -32,7 +32,6 @@ var resizableBoxes = function(){
 
 var doneStructuringDay = function(){
   $("#one").on('click', function() {
-    console.log("Clicked first button. Done with structuring day.")
     $(".first-step-flex").addClass("hidden");
     $(".second-step-flex").removeClass("hidden");
     $("#showTodoForm").removeClass("hidden");
@@ -40,14 +39,12 @@ var doneStructuringDay = function(){
 }
 
 $(document).on('click','#two',function(){
-     console.log("Woot!! Got #2")
      $("#showTodoForm").addClass("hidden");
      $(".second-step-flex").addClass("hidden");
      $(".third-step-flex").removeClass("hidden");
 })
 
 $(document).on('click','#three',function(){
-     console.log("Woot!! Got #3")
      $(".third-step-flex").addClass("hidden");
 })
 
@@ -74,9 +71,7 @@ var showTodoLists = function(){
 
 $(document).on('click','#completed-the-thing',function(){
    event.preventDefault();
-   console.log("Got the clickie box of doneness")
    var url = $(this).attr("action")
-   console.log(url)
    var formData = $(this).serialize();
    $.ajax({
      url: url,
@@ -94,7 +89,6 @@ $(document).on('click','#completed-the-thing',function(){
 
 $(document).on('click','#linkToShowTodoForm', function(){
     event.preventDefault();
-    console.log("in ShowNewTodoForm");
     $("#showTodoForm").removeClass("hidden");
     $(this).addClass("hidden");
 })
@@ -104,7 +98,6 @@ $(document).on('click','#new-todo-btn', function(){
     $("#new-todo-btn").removeClass("success")
     var url = $(this).children().attr("action");
     var formData = $("#new-todo-form").serialize();
-    console.log(formData)
     $.ajax({
       url: url,
       method: "POST",
@@ -112,7 +105,6 @@ $(document).on('click','#new-todo-btn', function(){
     })
     .done(function(server_response) {
       var task = JSON.parse(server_response)
-      console.log(task)
       $("#new-todo-btn").addClass("success")
       $('#new-todo-form').find('input:text').val('');
       $('#new-todo-form').find('textarea').val('');
@@ -137,7 +129,6 @@ $(document).on('click','#todo-done-btn', function(){
   })
 
 $(document).on('click','#showDetails', function(){
-     console.log("Woot!! Got showDetails button")
      event.preventDefault();
      var url = $(this).val("href").attr("href")
      $.ajax({
@@ -145,7 +136,6 @@ $(document).on('click','#showDetails', function(){
      })
      .done(function(server_response) {
        var edit_form = JSON.parse(server_response);
-       console.log("Should be showing in 1 which is hidden");
        $(".first-step-flex").addClass("hidden")
        $(".second-step-flex").addClass("hidden")
        $(".third-step-flex").addClass("hidden")
@@ -159,19 +149,16 @@ $(document).on('click','#showDetails', function(){
 })
 
 $(document).on('click','#submit-edits-btn', function(){   // This is picking up
-     console.log("Woot!! Got submit-edits-btn")
      saveChanges();
 })
 
 var saveChanges = function() {
     event.preventDefault();
-    console.log("in the saveChanges function")
     var url = $("#edit-form form").attr("action");
     var todo_id = $("#edit-form form").attr("id")
     var formData = $("#edit-form form").serialize();
-    // console.log(formData)
     var whatFunctionIsThis = function() {
-      console.log("What to do here?")
+      console.log("Mystery function?")
   }
     $.ajax({
       url: url,
@@ -179,14 +166,10 @@ var saveChanges = function() {
       method: "PUT"
     })
     .done(function(a, b, c) {
-      console.log("in the done part of saveChanges")
       whatFunctionIsThis(a, b, c, todo_id)
 
       $("#edit-form").hide();
       revised_todo = JSON.parse(a)
-      console.log ("revised_todo id:")
-      console.log(revised_todo.id)
-      console.log($("#todo-" + revised_todo.id))
       $("#todo-" + revised_todo.id).remove();
 
       if (revised_todo.brainjuice_id == 1) {
