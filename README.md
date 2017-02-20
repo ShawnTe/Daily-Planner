@@ -1,7 +1,7 @@
 # Read Me
 
 ## Summary
-The Daily Planner is a more visually friendly ToDo SPA.  
+The Daily Planner is a ToDo SPA that's different than other ToDo apps in that it's oriented aroun 'BrainJuice'. BrainJuice is the mental/psychological effort that a task requires of you. By grouping tasks by BrainJuice, you are more effective and waste less time/energy transitioning in/out of tasks.  
   
 This is an ongoing learning project. Steps to learn different skills are:  
 1. Sinatra app with CSS and JS/Ajax [On Heroku](https://visual-daily-planner.herokuapp.com/todos)   
