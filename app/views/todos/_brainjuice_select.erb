@@ -1,12 +1,13 @@
-<% if @todo %>
-<%= @bj_name %>
-<% end %>
-
 <div>
   <label for="bj-new-todo">Brainjuice required </label>
   <select name="brainjuice_id" id="bj-new-todo">
-    <option>Medium</option>
-    <option>High</option>
-    <option>Low</option>
+    <% BJs = ["High", "Medium", "Low"] %>
+    <% BJs.each do |bj| %>
+      <% if bj == @bj_name %>
+        <option selected><%= bj %></option>
+      <% else %>
+        <option><%= bj %></option>
+      <% end %>
+    <% end %>
   </select>
 </div>

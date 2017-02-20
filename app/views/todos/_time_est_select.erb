@@ -1,15 +1,20 @@
-<% if @todo %>
-  <%= @todo.time_est %>
-  string vs integer?? 
-<% end %>
-
-
 <div>
   <label for="time-est">Time estimate </label>
   <select name="time_est" id="time-est">
+    <% times = [5, 15, 30, 60] %>
+    <% if @todo && @todo.time_est %>
+      <% times.each do |est| %>
+        <% if est == @todo.time_est %>
+          <option selected><%= est %> min</option>
+        <% else %>
+          <option><%= est %> min</option>
+        <% end %>
+      <% end %>
+    <% else %>
       <option value="5">5 min</option>
       <option value="15">15 min</option>
       <option value="30">30 min</option>
       <option value="60">60 min</option>
+    <% end %>
   </select>
 </div>
