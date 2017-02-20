@@ -17,6 +17,8 @@ This is an ongoing learning project. Steps to learn different skills are:
 - User sees tasks divided into high, med low priority/brain juice
 - User can add new task + priority
 - User sees new task show up immediately
+- User can edit task
+- User can mark task complete
 - Site is deployed on Heroku
 - WOOOTTTTT!!!
 
