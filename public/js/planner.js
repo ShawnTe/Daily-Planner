@@ -81,6 +81,7 @@ $(document).on('click','#completed-the-thing',function(){
    .done(function(server_response) {
      var todo = JSON.parse(server_response)
      $("#todo-" + todo.id).hide();
+     $("#edit-form").hide();
    })
    .fail(function(server_response) {
        alert(server_response.error)
