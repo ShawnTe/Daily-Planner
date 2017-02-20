@@ -22,10 +22,11 @@ This is an ongoing learning project. Steps to learn different skills are:
 - Site is deployed on Heroku
 - WOOOTTTTT!!!
 
-### v.next
+### v.next features
 - User sees prepopulated time containers
 - Time containers connected to Google Cal api
-- Containers sized by session duration
+- Containers sized by BJ session duration
+- User can drag and drop tasks to a specific BJ session
 
 ### Good things
 - New Todo submit button flashed on .done function
