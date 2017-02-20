@@ -96,15 +96,14 @@ $(document).on('click','#linkToShowTodoForm', function(){
 
 var addListItem = function(task) {
   if (task.brainjuice_id == 1) {
-   $( "ul#high li" ).first().before(
-      "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+    var bj = "high"
   } else if (task.brainjuice_id == 2) {
-    $( "ul#medium li" ).first().before(
-      "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+    var bj = "medium"
   } else {
-    $( "ul#low li" ).first().before(
-      "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
+    var bj = "low"
   }
+   $( "ul#" + bj +" li" ).first().before(
+      "<li id=\"todo-" + task.id + "\">(" + task.time_est + " <em>min</em>) &nbsp <form class=\"inline\" action=\"/todos/" + task.id + "\" method=\"post\" id=\"completed-the-thing\"><input type=\"hidden\" name=\"_method\" value=\"PUT\"><i class=\"fa fa-square-o\" aria-hidden=\"true\"></i></form><a href=\"/todos/" + task.id + "/edit\" id=\"showDetails\"> &nbsp;" + task.name + "</a></li>" );
 }
 
 $(document).on('click','#new-todo-btn', function(){
@@ -144,7 +143,6 @@ $(document).on('click','#showDetails', function(){
        $(".first-step-flex").addClass("hidden")
        $(".second-step-flex").addClass("hidden")
        $(".third-step-flex").addClass("hidden")
-      //  $("#edit-form").removeClass("hidden");
        $("#edit-form").show();
        $("#edit-form").empty().append(edit_form);
      })
@@ -153,7 +151,7 @@ $(document).on('click','#showDetails', function(){
      })
 })
 
-$(document).on('click','#submit-edits-btn', function(){   // This is picking up
+$(document).on('click','#submit-edits-btn', function(){
      saveChanges();
 })
 
