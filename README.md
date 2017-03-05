@@ -35,3 +35,19 @@ This is an ongoing learning project. Steps to learn different skills are:
 - Flexbox
 - Using partials
 - jQueryUI for draggable and resizeable boxes
+
+### User Process
+This is the user's process that I'm basing my design decisions on. Based on [Natural Professional](http://www.naturalprofessional.com/) methodology.  
+1. Enter Todos (Braindump!) (Pool of Possibilities)  
+2. Clean up Todos (doing anything here??)  
+3. Plan day  
+  - Set Brainjuice session lengths  
+  - Assign Todos to Container by Brainjuice  
+    - receive error if too many  
+    - unassign as needed  
+4. Get to work!  
+  - View only Todos in current Brainjuice session  
+  - Edit Todos if nec  
+  - Mark Todos complete  
+5. End of session wrap up  
+  - Decide if undone todos carry over or return to Pool of Possibilities  
