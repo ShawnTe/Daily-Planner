@@ -1,12 +1,12 @@
 # Read Me
 
 ## Summary
-The Daily Planner is a ToDo SPA that's different than other ToDo apps in that it's oriented aroun 'BrainJuice'. BrainJuice is the mental/psychological effort that a task requires of you. By grouping tasks by BrainJuice, you are more effective and waste less time/energy transitioning in/out of tasks.  
+The Daily Planner is a ToDo SPA that's different than other ToDo apps in that it's oriented around 'BrainJuice'. BrainJuice is the mental/psychological effort that a task requires of you. By grouping tasks by BrainJuice, you are more effective and waste less time/energy transitioning in/out of tasks.  
   
 This is an ongoing learning project. Steps to learn different skills are:  
 1. Sinatra app with CSS and JS/Ajax [On Heroku](https://visual-daily-planner.herokuapp.com/todos)   
-2. Decouple app (Rails API backend) [On Github](https://github.com/ShawnTe/daily-planner-rails-api)    
-3. React front end **(current status)**  
+2. Rails API backend [On Github](https://github.com/ShawnTe/daily-planner-rails-api)    
+3. React frontend **(current status)**  
 4. SVG calendar  
 5. Mobile version  
 
