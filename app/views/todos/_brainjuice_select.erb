@@ -1,8 +1,8 @@
 <div>
   <label for="bj-new-todo">Brainjuice required </label>
   <select name="brainjuice_id" id="bj-new-todo">
-    <% BJs = ["High", "Medium", "Low"] %>
-    <% BJs.each do |bj| %>
+    <% criticalness = ["High", "Medium", "Low"] %>
+    <% criticalness.each do |bj| %>
       <% if bj == @bj_name %>
         <option selected><%= bj %></option>
       <% else %>
