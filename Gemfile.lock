@@ -1,9 +1,9 @@
 GIT
-  remote: git://github.com/stympy/faker.git
-  revision: 6c3a7c55a9d7e48791db4b575dd9ce03f6e92098
+  remote: https://github.com/stympy/faker.git
+  revision: b98d32dcca8aa482525320d8463dff741af0d84d
   specs:
-    faker (2.11.0)
-      i18n (>= 1.6, < 2)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
 
 GEM
   remote: https://rubygems.org/
@@ -31,12 +31,12 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.10)
     diff-lcs (1.3)
     dotenv (2.7.5)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
-    i18n (1.8.2)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -87,7 +87,7 @@ GEM
       tilt (~> 2.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    tzinfo (1.2.7)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
